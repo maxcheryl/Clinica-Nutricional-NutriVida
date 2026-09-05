@@ -1,0 +1,16 @@
+.py-section {
+    padding: 5rem 0;
+    background-color: var(--bg);
+}
+
+.bg-alt {
+    background-color: var(--white);
+}
+.subsection-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0;
+}
+

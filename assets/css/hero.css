@@ -1,0 +1,84 @@
+.hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    background: url('../img/heroBg.png') center,
+                linear-gradient(to bottom, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.75) 20%, rgba(245,251,245,0.7) 35%, rgba(232,245,233,0.65) 50%, rgba(213,237,219,0.6) 65%, rgba(200,230,201,0.55) 80%, rgb(137, 201, 163) 100%);
+    color: var(--text);
+    padding: 9rem 0;
+    
+}
+
+.hero-logo {
+    display: block;
+    margin: 0 auto 1.5rem;
+    max-width: 80px;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 4.5rem;
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #1b1a1a;
+    letter-spacing: 0px;
+}
+
+.hero-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    opacity: 0.85;
+    text-align: center;
+    color: #434040;
+}
+
+.hero .btn-accent {
+    background-color: #74c056;
+    color: var(--white);
+    font-weight: 600;
+    padding: 0.7rem 2rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: none;
+    transition: var(--transition);
+}
+
+.hero .btn-accent:hover {
+    background-color: #5db83a;
+    transform: translateY(-2px);
+}
+
+.hero .card-servicio {
+    background-color: var(--white);
+    border: none;
+    border-radius: 30px;
+}
+
+.hero .card-servicio .card-icon {
+    color: var(--primary);
+}
+
+.hero .card-servicio .card-price {
+    color: var(--secondary-dark);
+}
+
+.hero .card-servicio .btn {
+    background-color: #74c056;
+    border-color: #74c056;
+    color: var(--white);
+}
+
+.hero .card-servicio .btn:hover {
+    background-color: #5db83a;
+    border-color: #5db83a;
+}

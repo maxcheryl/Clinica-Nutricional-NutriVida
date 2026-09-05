@@ -1,0 +1,31 @@
+:root {
+    --primary: #4f63d4;
+    --primary-dark: #4455b8;
+    --secondary: #74c056;
+    --secondary-dark: #4f8539;
+    --accent: #e7a258;
+    --accent-dark: #db8d3a;
+    --bg: #F8FAF9;
+    --text: #222020;
+    --text-light: #777777;
+    --white: #FFFFFF;
+    --border: #E8E8E8;
+    --shadow: 0 1px 4px rgba(0, 0, 0, 0.13);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.13);
+    --radius: 15px;
+    --transition: all 0.25s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    padding-top: 0px;
+}

@@ -1,0 +1,26 @@
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .subsection-title {
+        font-size: 1.3rem;
+    }
+
+    .py-section {
+        padding: 3.5rem 0;
+    }
+
+    .card-contacto .card-body {
+        padding: 1.5rem;
+    }
+}
+

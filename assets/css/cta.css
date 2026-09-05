@@ -1,0 +1,40 @@
+.cta-section {
+    background-color: #e8d5c0a2;
+    color: #434040;
+}
+
+.cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.cta-section p {
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+}
+
+.cta-img {
+    max-width: 100%;
+    display: block;
+}
+
+.cta-text-box {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.cta-section .btn-accent {
+    background-color: var(--accent);
+    color: var(--white);
+    font-weight: 600;
+    padding: 0.7rem 2rem;
+    border-radius: 25px;
+    border: none;
+    transition: var(--transition);
+}
+
+.cta-section .btn-accent:hover {
+    background-color: #C49564;
+    transform: translateY(-2px);
+}

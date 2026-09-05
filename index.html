@@ -3,27 +3,355 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clínica Nutricional NutriVida</title>
-    <link rel="icon" type="" href=""> <!--32px/ creo que mas grandes quedan mal-->
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <title>Clínica NutriVida</title>
+    <link rel="icon" type="png" href="/assets/img/favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <header>
-        <nav>
-            <a href="#inicio"><img src="LOGO"></a>
-            <ul> 
-                <li> <a aria-current="page" href="#inicio">Inicio</a> </li>
-                <li> <a href="/pages/nosotros.html">Quiénes somos</a> </li>
-                <li> <a href="/pages/contacto.html">Contáctanos</a> </li>
-                
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="assets/img/logo.png" alt="NutriVida" class="brand-logo">
+                    <span class="brand-text">Clínica NutriVida</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#nosotros">Quiénes somos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contacto">Contáctanos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/servicios.html">Servicios</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/autenticacion.html">Iniciar Sesión</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-success ms-lg-2" href="pages/agendar.html"><i class="bi bi-calendar-check me-2"></i>Reservar Hora</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     </header>
+
     <main>
+        <!-- HERO -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <img src="assets/img/logo.png" alt="NutriVida" class="hero-logo">
+                    <h1 class="hero-title">Alimenta Tu Bienestar<br>Transforma Tu Salud</h1>
+                    <p class="hero-subtitle">En NutriVida te acompañamos con atención nutricional personalizada para alcanzar tus objetivos y construir hábitos saludables.</p>
+                    <a href="pages/agendar.html" class="btn btn-accent btn-lg mt-3">Reservar Hora</a>
+                </div>
+
+                <div class="row g-4 justify-content-center">
+                    <!-- Card 1 -->
+                    <div class="col-md-4">
+                        <div class="card card-servicio">
+                            <div class="card-body">
+                                <div class="card-icon">
+                                    <i class="bi bi-heart-pulse"></i>
+                                </div>
+                                <h5 class="card-title">Primera consulta nutricional</h5>
+                                <p class="card-text">Primera evaluación nutricional completa para diseñar tu plan personalizado.</p>
+                                <div class="card-price">$25.000</div>
+                                <a href="pages/servicios.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="col-md-4">
+                        <div class="card card-servicio">
+                            <div class="card-body">
+                                <div class="card-icon">
+                                    <i class="bi bi-clipboard2-pulse"></i>
+                                </div>
+                                <h5 class="card-title">Plan de pérdida de peso</h5>
+                                <p class="card-text">Plan de alimentación de 1 mes con seguimiento y ajustes semanales.</p>
+                                <div class="card-price">$45.000</div>
+                                <a href="pages/servicios.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="col-md-4">
+                        <div class="card card-servicio">
+                            <div class="card-body">
+                                <div class="card-icon">
+                                    <i class="bi bi-activity"></i>
+                                </div>
+                                <h5 class="card-title">Antropometría completa</h5>
+                                <p class="card-text">Evaluación completa de composición corporal con mediciones detalladas.</p>
+                                <div class="card-price">$15.000</div>
+                                <a href="pages/servicios.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NOSOTROS -->
+        <section id="nosotros" class="py-section bg-alt">
+            <div class="container">
+                <h2 class="section-title">Quiénes Somos</h2>
+                <p class="section-subtitle mb-5">Conoce nuestra historia y equipo profesional</p>
+
+                <!-- HISTORIA -->
+                <div class="row align-items-center mb-5">
+                    <div class="col-lg-6 mb-4 mb-lg-0 pe-lg-4">
+                        <h3 class="subsection-title mb-3">Nuestra Historia</h3>
+                        <p class="history-text">NutriVida es una clínica de nutrición y dietética fundada en 2016 en Temuco, Región de La Araucanía. Contamos con un equipo de 4 nutricionistas certificados comprometidos con la educación y el acompañamiento de cada paciente en su camino hacia una vida más saludable.</p>
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <img src="assets/img/team.png" alt="Nutricionista NutriVida" class="img-fluid rounded-4 history-img">
+                    </div>
+                </div>
+
+                <!-- MISIÓN Y VALORES -->
+                <div class="row g-4 mb-5">
+                    <div class="col-md-4">
+                        <div class="card card-valor h-100">
+                            <div class="card-body">
+                                <div class="valor-icon">
+                                    <i class="bi bi-bullseye"></i>
+                                </div>
+                                <h5 class="card-title">Misión</h5>
+                                <p class="card-text">Promover hábitos alimentarios saludables mediante planes personalizados en obesidad, síndrome metabólico, nutrición deportiva, alimentación vegetariana/vegana y nutrición pediátrica.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-valor h-100">
+                            <div class="card-body">
+                                <div class="valor-icon">
+                                    <i class="bi bi-eye"></i>
+                                </div>
+                                <h5 class="card-title">Visión</h5>
+                                <p class="card-text">Ser referentes en nutrición clínica en la Región de La Araucanía, reconocidos por nuestra excelencia profesional y el bienestar integral de nuestra comunidad.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-valor h-100">
+                            <div class="card-body">
+                                <div class="valor-icon">
+                                    <i class="bi bi-heart"></i>
+                                </div>
+                                <h5 class="card-title">Valores</h5>
+                                <p class="card-text">Compromiso, empatía, profesionalismo y pasión por la salud. Cada paciente es único y merece una atención excepcional.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EQUIPO -->
+                <h3 class="subsection-title text-center mt-5 mb-2">Nuestro Equipo</h3>
+                <p class="section-subtitle">Profesionales comprometidos con tu salud</p>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card card-equipo h-100 text-center">
+                            <div class="card-body">
+                                <img src="assets/img/nut1.png" alt="Nut. Carolina Fuentes M." class="equipo-avatar">
+                                <h5 class="card-title">Carolina Fuentes M.</h5>
+                                <p class="card-text text-muted">Obesidad y síndrome metabólico</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card card-equipo h-100 text-center">
+                            <div class="card-body">
+                                <img src="assets/img/nut2.png" alt="Nut. Rodrigo Sepúlveda A." class="equipo-avatar">
+                                <h5 class="card-title">Rodrigo Sepúlveda A.</h5>
+                                <p class="card-text text-muted">Nutrición deportiva y rendimiento</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card card-equipo h-100 text-center">
+                            <div class="card-body">
+                                <img src="assets/img/nut3.png" alt="Nut. Daniela Morales C." class="equipo-avatar">
+                                <h5 class="card-title">Daniela Morales C.</h5>
+                                <p class="card-text text-muted">Alimentación vegetariana, vegana y trastornos alimentarios</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card card-equipo h-100 text-center">
+                            <div class="card-body">
+                                <img src="assets/img/nut4.png" alt="Nut. Felipe Araya R." class="equipo-avatar">
+                                <h5 class="card-title">Felipe Araya R.</h5>
+                                <p class="card-text text-muted">Nutrición pediátrica y familiar</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACTO -->
+        <section id="contacto" class="py-section">
+            <div class="container">
+                <h2 class="section-title">Contáctanos</h2>
+                <p class="section-subtitle">Estamos aquí para ayudarte. Envíanos tu consulta.</p>
+
+                <div class="row g-4 g-lg-5">
+                    <!-- FORMULARIO -->
+                    <div class="col-lg-6">
+                        <div class="card card-contacto h-100">
+                            <div class="card-body p-4 p-lg-5">
+                                <h4 class="contacto-card-title mb-4">Envíanos un mensaje</h4>
+                                <form id="contactForm">
+                                    <div class="mb-3">
+                                        <label for="nombre" class="form-label">Nombre completo</label>
+                                        <input type="text" class="form-control" id="nombre" placeholder="Tu nombre" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Correo electrónico</label>
+                                        <input type="email" class="form-control" id="email" placeholder="correo@correo.com" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="telefono" class="form-label">Teléfono</label>
+                                        <input type="tel" class="form-control" id="telefono" placeholder="+56 9 1234 5678">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="mensaje" class="form-label">Mensaje</label>
+                                        <textarea class="form-control" id="mensaje" rows="4" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-contacto w-100">Enviar Mensaje</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INFO Y MAPA -->
+                    <div class="col-lg-6 d-flex flex-column">
+                        <div class="card card-contacto mb-4">
+                            <div class="card-body p-4 p-lg-4">
+                                <h4 class="contacto-card-title mb-4">Información de contacto</h4>
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="bi bi-geo-alt"></i>
+                                    </div>
+                                    <div class="contact-info">
+                                        <strong>Dirección</strong>
+                                        <p>Milano 01591, Temuco</p>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="bi bi-telephone"></i>
+                                    </div>
+                                    <div class="contact-info">
+                                        <strong>Teléfono</strong>
+                                        <p><a href="tel:+56912345678">+56 9 1234 5678</a></p>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="bi bi-envelope"></i>
+                                    </div>
+                                    <div class="contact-info">
+                                        <strong>Correo</strong>
+                                        <p><a href="mailto:contacto@nutrivida.cl">contacto@nutrivida.cl</a></p>
+                                    </div>
+                                </div>
+                                <div class="contact-item mb-0">
+                                    <div class="contact-icon">
+                                        <i class="bi bi-clock"></i>
+                                    </div>
+                                    <div class="contact-info">
+                                        <strong>Horario</strong>
+                                        <p>Lun - Vie: 9:00 - 18:00</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card card-contacto flex-grow-1 overflow-hidden">
+                            <div class="map-responsive">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m21!1m12!1m3!1d449.3127921749834!2d-72.62761412843615!3d-38.759737890809305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m6!3e3!4m0!4m3!3m2!1d-38.75973853338196!2d-72.62755234923134!5e0!3m2!1ses-419!2scl!4v1788635136026!5m2!1ses-419!2scl" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="row align-items-center justify-content-center g-5">
+                    <!-- IMAGEN -->
+                    <div class="col-lg-3 text-center">
+                        <img src="assets/img/doctora1.png" alt="Nutricionista NutriVida" class="cta-img">
+                    </div>
+                    <!-- TEXTO -->
+                    <div class="col-lg-5">
+                        <div class="cta-text-box">
+                            <h2>¿Listo para empezar?</h2>
+                            <p>Reserva tu primera consulta y descubre cómo podemos mejorar tu calidad de vida.</p>
+                            <a href="pages/agendar.html" class="btn btn-accent btn-lg">Reserva tu primera consulta</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
-    <footer>
-        <p>Grupo Calcetines <br> Sebastián Neira - Maxine Moreno <br> DSY1104 - 2026</p>
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <!-- MARCA-->
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-brand-box">
+                        <h5 class="footer-title">NutriVida</h5>
+                        <p class="footer-text">Clínica nutricional dedicada a mejorar tu calidad de vida mediante hábitos alimentarios saludables y atención profesional.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 ms-auto">
+                    <div class="d-flex gap-5 justify-content-end">
+                        <div>
+                            <h5 class="footer-title">Enlaces</h5>
+                            <ul class="footer-links">
+                                <li><a href="index.html">Inicio</a></li>
+                                <li><a href="#nosotros">Quiénes somos</a></li>
+                                <li><a href="pages/servicios.html">Servicios</a></li>
+                                <li><a href="#contacto">Contacto</a></li>
+                            </ul>
+                        </div>
+                        <!-- CONTACTO -->
+                        <div>
+                            <h5 class="footer-title">Contacto</h5>
+                            <ul class="footer-contact">
+                                <li><i class="bi bi-geo-alt me-2"></i>Milano 01591, Temuco</li>
+                                <li><i class="bi bi-telephone me-2"></i>+56 9 1234 5678</li>
+                                <li><i class="bi bi-envelope me-2"></i>contacto@nutrivida.cl</li>
+                                <li><i class="bi bi-clock me-2"></i>Lun - Vie: 9:00 - 18:00</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <p class="footer-copyright">DSY1104 - 2026<br>Grupo Calcetines: Sebastián Neira - Maxine Moreno</p>
+        </div>
     </footer>
-    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
