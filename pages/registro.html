@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión</title>
+    <title>Registrarse</title>
     <link rel="icon" type="png" href="/assets/img/favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="/assets/js/registro.js" defer></script>
 </head>
 <body>
     <header>
@@ -48,46 +49,104 @@
         </nav>
     </header>
     <main>
-        <div class="row ms-5 justify-content-center">
+          <div class="row ms-5 justify-content-center">
             <div class="col-lg-8 col-xl-7 mt-5 mb-5 me-5">
                 <section class="mb-4 text-center mt-5 mb-5">
                     <h1 class="display-6 fw-bold">Bienvenid@ a NutriVida</h1>
                     <p class="text-secondary">
-                        Porfavor ingresa tus datos para entrar al sitio
+                        Porfavor ingresa tus datos para crear tu cuenta
                     </p>
                 </section>
-                <!-- INICIO DE SESION-->
+                <!-- REGISTRO DE USUARIO-->
                 <section class="card shadow-sm border-0 mb-5 col-lg-6 col-md-6">
                     <div class="card-body p-4 p-md-5">
-                        <form id="formIniciarSesion">
+                        <form id="formCrearCuenta">
                             <div class="row g-3 col-12">
                                 <div class="col-12">
-                                    <label for="correo" class="form-label">Correo electrónico</label>
-                                    <input type="text" class="form-control" id="correo" name="correo" placeholder="correo@duocuc.cl">
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre">
                                 </div>
-                                <div class="col-md-6 col-lg-6 col-8">
+                                <div class="col-12">
+                                    <label for="apellido" class="form-label">Apellido</label>
+                                    <input type="text" class="form-control" id="apellido" name="apellido"">
+                                </div>
+                                <div class="col-12">
+                                    <label for="correo" class="form-label">Correo electrónico</label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="correo@duocuc.cl">
+                                </div>
+                                <div class="col-12">
+                                    <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
+                                    <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento">
+                                </div>
+                                <div class="col-7">
                                     <label for="contrasena" class="form-label">Contraseña</label>
-                                    <input type="password" class="form-control" id="inputPass" placeholder="••••••••">
+                                    <input type="password" class="form-control" id="pass" placeholder="••••••••">
+                                </div>
+                                <!--MENSAJE CONTRASEÑA NO COINCIDE-->
+                                <div id="mensajeContrasena" class="alert alert-danger mb-0 d-none col-5 p-2 text-center " role="alert">
+                                    Contraseñas no coinciden
+                                </div>
+                                <div class="col-7">
+                                    <label for="confirmarContrasena" class="form-label">Confirmar contraseña</label>
+                                    <input type="password" class="form-control" id="confirmPass" placeholder="••••••••">
+                                </div>
+                                
+                                <!-- Seleccionar género-->
+                                 <div class="col-8">
+                                    <label for="genero" class="form-label">Género</label>
+                                    <select class="form-select" id="genero" name="genero">
+                                        <option value="Mujer">Mujer</option>
+                                        <option value="Hombre">Hombre</option>
+                                        <option value="Otro">Otro</option>
+                                    </select>
+                                </div>
+                                <!-- Seleccionar region -->
+                                <div class="col-12">
+                                    <label for="tipo" class="form-label">Región</label>
+                                    <select class="form-select" id="region" name="region">
+                                        <option value="Arica">Arica y Parinacota</option>
+                                        <option value="Tarapaca">Tarapacá</option>
+                                        <option value="Antofagasta">Antofagasta</option>
+                                        <option value="Atacama">Atacama</option>
+                                        <option value="Coquimbo">Coquimbo</option>
+                                        <option value="Valparaiso">Valparaíso</option>
+                                        <option value="Metropolitana">Metropolitana de Santiago</option>
+                                        <option value="O'Higgins">Libertador General Bernardo O'Higgins</option>
+                                        <option value="Maule">Maule</option>
+                                        <option value="Nuble">Ñuble</option>
+                                        <option value="Biobio">Biobío</option>
+                                        <option value="Araucania">La Araucanía</option>
+                                        <option value="Rios">Los Ríos</option>
+                                        <option value="Lagos">Los Lagos</option>
+                                        <option value="Aysen">Aysén del General Carlos Ibáñez del Campo</option>
+                                        <option value="Magallanes">Magallanes y de la Antártica Chilena</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label for="direccion" class="form-label">Dirección</label>
+                                    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Nombre de la calle y número de la casa">
                                 </div>
                                 <div class="col-12 d-grid mt-4">
-                                    <a href="/index.html" class="btn btn-success btn-lg col-lg-12">Iniciar sesión</a>
+                                    <button type="submit" class="btn btn-success btn-lg">
+                                        Crear cuenta
+                                    </button>
                                 </div>
                                 <div class="col-12 d-flex align-items-center gap-2 mt-3">
-                                    <p class="mb-0 col-8 col-lg-7">¿No tienes una cuenta?</p>
-                                    <a href="registro.html" class="btn btn-warning btn-sm col-lg-4">Crear cuenta</a>
+                                    <p class="mb-0 col-8 col-lg-6">¿Ya tienes una cuenta?</p>
+                                    <a href="autenticacion.html" class="btn btn-warning btn-sm col-lg-4">Iniciar sesión</a>
                                 </div>
                             </div>
                         </form>
                         <!-- MENSAJE DE ALERTA-->
-                        <div id="mensajeCredencialesIncorrectas" class="alert alert-danger mt-4 d-none" role="alert">
+                        <div id="mensajeRegistro" class="alert alert-danger mt-4 d-none" role="alert">
                             Correo o contraseña incorrectas, intentelo nuevamente
                         </div>
                     </div>
                 </section>
             </div>
         </div>
+    </main>  
     </main>
-
     <footer class="footer">
         <div class="container">
             <div class="row g-4">
@@ -128,4 +187,4 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
-</html>l
+</html>
