@@ -23,7 +23,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
+                            <a class="nav-link active" href="#">Inicio</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#nosotros">Quiénes somos</a>
@@ -110,53 +110,16 @@
         <section id="nosotros" class="py-section bg-alt">
             <div class="container">
                 <h2 class="section-title">Quiénes Somos</h2>
-                <p class="section-subtitle mb-5">Conoce nuestra historia y equipo profesional</p>
+                <p class="section-subtitle mb-5">Conoce al equipo detrás de NutriVida</p>
 
                 <!-- HISTORIA -->
                 <div class="row align-items-center mb-5">
                     <div class="col-lg-6 mb-4 mb-lg-0 pe-lg-4">
                         <h3 class="subsection-title mb-3">Nuestra Historia</h3>
-                        <p class="history-text">NutriVida es una clínica de nutrición y dietética fundada en 2016 en Temuco, Región de La Araucanía. Contamos con un equipo de 4 nutricionistas certificados comprometidos con la educación y el acompañamiento de cada paciente en su camino hacia una vida más saludable.</p>
+                        <p class="history-text">Somos el equipo de NutriVida, una clínica de nutrición y dietética fundada en 2016 en Temuco. Contamos con 4 nutricionistas certificados cuyo propósito es entregar orientación nutricional personalizada y promover hábitos saludables, ayudando a cada paciente a alcanzar sus objetivos de bienestar.</p>
                     </div>
                     <div class="col-lg-6 text-center">
                         <img src="assets/img/team.png" alt="Nutricionista NutriVida" class="img-fluid rounded-4 history-img">
-                    </div>
-                </div>
-
-                <!-- MISIÓN Y VALORES -->
-                <div class="row g-4 mb-5">
-                    <div class="col-md-4">
-                        <div class="card card-valor h-100">
-                            <div class="card-body">
-                                <div class="valor-icon">
-                                    <i class="bi bi-bullseye"></i>
-                                </div>
-                                <h5 class="card-title">Misión</h5>
-                                <p class="card-text">Promover hábitos alimentarios saludables mediante planes personalizados en obesidad, síndrome metabólico, nutrición deportiva, alimentación vegetariana/vegana y nutrición pediátrica.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card card-valor h-100">
-                            <div class="card-body">
-                                <div class="valor-icon">
-                                    <i class="bi bi-eye"></i>
-                                </div>
-                                <h5 class="card-title">Visión</h5>
-                                <p class="card-text">Ser referentes en nutrición clínica en la Región de La Araucanía, reconocidos por nuestra excelencia profesional y el bienestar integral de nuestra comunidad.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card card-valor h-100">
-                            <div class="card-body">
-                                <div class="valor-icon">
-                                    <i class="bi bi-heart"></i>
-                                </div>
-                                <h5 class="card-title">Valores</h5>
-                                <p class="card-text">Compromiso, empatía, profesionalismo y pasión por la salud. Cada paciente es único y merece una atención excepcional.</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -169,7 +132,7 @@
                             <div class="card-body">
                                 <img src="assets/img/nut1.png" alt="Nut. Carolina Fuentes M." class="equipo-avatar">
                                 <h5 class="card-title">Carolina Fuentes M.</h5>
-                                <p class="card-text text-muted">Obesidad y síndrome metabólico</p>
+                                <p class="card-text text-muted">Especialista en obesidad y síndrome metabólico</p>
                             </div>
                         </div>
                     </div>
@@ -178,7 +141,7 @@
                             <div class="card-body">
                                 <img src="assets/img/nut2.png" alt="Nut. Rodrigo Sepúlveda A." class="equipo-avatar">
                                 <h5 class="card-title">Rodrigo Sepúlveda A.</h5>
-                                <p class="card-text text-muted">Nutrición deportiva y rendimiento</p>
+                                <p class="card-text text-muted">Especialista en nutrición deportiva y rendimiento</p>
                             </div>
                         </div>
                     </div>
@@ -187,7 +150,7 @@
                             <div class="card-body">
                                 <img src="assets/img/nut3.png" alt="Nut. Daniela Morales C." class="equipo-avatar">
                                 <h5 class="card-title">Daniela Morales C.</h5>
-                                <p class="card-text text-muted">Alimentación vegetariana, vegana y trastornos alimentarios</p>
+                                <p class="card-text text-muted">Especialista en alimentación vegetariana, vegana y trastornos alimentarios</p>
                             </div>
                         </div>
                     </div>
@@ -196,7 +159,7 @@
                             <div class="card-body">
                                 <img src="assets/img/nut4.png" alt="Nut. Felipe Araya R." class="equipo-avatar">
                                 <h5 class="card-title">Felipe Araya R.</h5>
-                                <p class="card-text text-muted">Nutrición pediátrica y familiar</p>
+                                <p class="card-text text-muted">Especialista en nutrición pediátrica y familiar</p>
                             </div>
                         </div>
                     </div>
@@ -219,7 +182,7 @@
                                 <form id="contactForm">
                                     <div class="mb-3">
                                         <label for="nombre" class="form-label">Nombre completo</label>
-                                        <input type="text" class="form-control" id="nombre" placeholder="Tu nombre" required>
+                                        <input type="text" class="form-control" id="nombre" placeholder="Tu nombre" required  minlength="2" maxlength="50">
                                     </div>
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Correo electrónico</label>
@@ -231,7 +194,7 @@
                                     </div>
                                     <div class="mb-4">
                                         <label for="mensaje" class="form-label">Mensaje</label>
-                                        <textarea class="form-control" id="mensaje" rows="4" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                                        <textarea class="form-control" id="mensaje" rows="4" placeholder="Escribe tu mensaje aquí..." required minlength="10" maxlength="500"></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-contacto w-100">Enviar Mensaje</button>
                                 </form>
@@ -328,7 +291,7 @@
                         <div>
                             <h5 class="footer-title">Enlaces</h5>
                             <ul class="footer-links">
-                                <li><a href="index.html">Inicio</a></li>
+                                <li><a href="#">Inicio</a></li>
                                 <li><a href="#nosotros">Quiénes somos</a></li>
                                 <li><a href="pages/servicios.html">Servicios</a></li>
                                 <li><a href="#contacto">Contacto</a></li>

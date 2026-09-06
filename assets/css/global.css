@@ -3,8 +3,8 @@
     --primary-dark: #4455b8;
     --secondary: #74c056;
     --secondary-dark: #4f8539;
-    --accent: #e7a258;
-    --accent-dark: #db8d3a;
+    --accent: #db8d3a;
+    --accent-dark: #e28521;
     --bg: #F8FAF9;
     --text: #222020;
     --text-light: #777777;
@@ -21,6 +21,10 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {

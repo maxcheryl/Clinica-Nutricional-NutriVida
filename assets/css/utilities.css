@@ -1,5 +1,5 @@
 .py-section {
-    padding: 5rem 0;
+    padding: 9rem 0;
     background-color: var(--bg);
 }
 
@@ -10,7 +10,7 @@
     font-family: 'Playfair Display', serif;
     font-size: 1.6rem;
     font-weight: 700;
-    color: var(--text);
+    color: var(--primary-dark);
     letter-spacing: 0;
 }
 

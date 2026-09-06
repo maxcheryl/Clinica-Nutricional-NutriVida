@@ -2,7 +2,7 @@
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
     font-weight: 700;
-    color: var(--primary-dark);
+    color: var(--text);
     text-align: center;
     margin-bottom: 0.5rem;
 }
@@ -92,64 +92,6 @@
 .history-img:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
-}
-
-/* VALORES (MISIÓN, VISIÓN, VALORES) */
-.card-valor {
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background-color: var(--white);
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-}
-
-.card-valor:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
-    border-color: rgba(79, 99, 212, 0.3);
-}
-
-.card-valor .card-body {
-    padding: 2.2rem 1.7rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.card-valor .valor-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: rgba(79, 99, 212, 0.08);
-    color: var(--primary);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.6rem;
-    margin-bottom: 1.25rem;
-    transition: var(--transition);
-}
-
-.card-valor:hover .valor-icon {
-    background-color: var(--primary);
-    color: var(--white);
-    transform: scale(1.08);
-}
-
-.card-valor .card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 0.75rem;
-}
-
-.card-valor .card-text {
-    color: var(--text-light);
-    font-size: 0.93rem;
-    line-height: 1.65;
-    margin-bottom: 0;
 }
 
 /* EQUIPO */

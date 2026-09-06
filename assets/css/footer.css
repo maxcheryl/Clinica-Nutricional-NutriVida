@@ -19,7 +19,7 @@
 
 .footer-text {
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.753);
 }
 
 .footer-links {
@@ -54,13 +54,13 @@
 }
 
 .footer-divider {
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.356);
     margin: 2rem 0 1.5rem;
 }
 
 .footer-copyright {
     text-align: center;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.87);
     font-size: 0.85rem;
     margin: 0;
 }
