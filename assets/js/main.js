@@ -1,5 +1,33 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+    const usuarioLogueado = JSON.parse(localStorage.getItem("usuarioLogueado"));
+
+    const botonIniciarSesion = document.getElementById("botonIniciarSesion");
+    const infoUsuario = document.getElementById("infoUsuario");
+    const botonCerrarSesion = document.getElementById("botonCerrarSesion");
+    const nombreUsuario = document.getElementById("nombreUsuario");
+    const btnCerrarSesion = document.getElementById("btnCerrarSesion")
+
+    if (usuarioLogueado) {
+        // Usuario logueado → mostrar nombre y cerrar sesión
+        if (botonIniciarSesion) botonIniciarSesion.classList.add("d-none");
+        if (infoUsuario) infoUsuario.classList.remove("d-none");
+        if (botonCerrarSesion) botonCerrarSesion.classList.remove("d-none");
+        if (nombreUsuario) nombreUsuario.textContent = `Hola, ${usuarioLogueado.nombre}`;
+    } else {
+        // No hay sesión → mostrar "Iniciar Sesión"
+        if (botonIniciarSesion) botonIniciarSesion.classList.remove("d-none");
+        if (infoUsuario) infoUsuario.classList.add("d-none");
+        if (botonCerrarSesion) botonCerrarSesion.classList.add("d-none");
+    }
+
+    if (botonCerrarSesion){
+        btnCerrarSesion.addEventListener("click", function(e){
+            e.preventDefault();
+            cerrarSesion()
+        })
+    }
+
     // FORMULARIO DE CONTACTO
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
@@ -19,7 +47,6 @@ document.addEventListener('DOMContentLoaded', function () {
             contactForm.reset();
         });
     }
-
 });
 
 const CLAVE_STORAGE = ""
