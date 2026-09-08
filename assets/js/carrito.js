@@ -75,9 +75,9 @@ function renderCarrito() {
                             <strong class="card-price" style="font-size: 1.3rem;">${formatPrecio(total)}</strong>
                         </div>
 
-                        <a href="agendar.html" class="btn btn-success w-100 mb-2">
+                        <button class="btn btn-success w-100 mb-2" onclick="confirmarReserva()">
                             <i class="bi bi-calendar-check me-1"></i>Confirmar reserva
-                        </a>
+                        </button>
                         <button class="btn btn-outline-danger w-100" onclick="mostrarModalVaciar()">
                             <i class="bi bi-trash me-1"></i>Vaciar carrito
                         </button>
@@ -96,6 +96,22 @@ function eliminarServicio(codigo) {
     eliminarDelCarrito(codigo);
     actualizarBadgeCarrito();
     renderCarrito();
+}
+
+function confirmarReserva() {
+    const usuario = obtenerUsuarioLogueado();
+    if (!usuario) {
+        const modal = new bootstrap.Modal(document.getElementById("modalLoginRequerido"));
+        modal.show();
+        return;
+    }
+
+    vaciarCarrito();
+    actualizarBadgeCarrito();
+    renderCarrito();
+
+    const modal = new bootstrap.Modal(document.getElementById("modalExito"));
+    modal.show();
 }
 
 function mostrarModalVaciar() {
