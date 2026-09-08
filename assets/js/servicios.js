@@ -181,9 +181,52 @@ function getBadgeClass(tipo) {
     return classes[tipo] || "bg-secondary";
 }
 
-function renderCatalogo(filtro = "todos") {
+let filtroTipoActivo = "todos";
+let filtroPrecioMin = 10000;
+let filtroPrecioMax = 170000;
+
+function showToast(mensaje, tipo) {
+    const toast = document.getElementById("toast-carrito");
+    const body = document.getElementById("toast-carrito-body");
+    if (!toast || !body) return;
+    toast.className = `toast align-items-center text-bg-${tipo} border-0`;
+    body.textContent = mensaje;
+    const bsToast = new bootstrap.Toast(toast, { delay: 2500 });
+    bsToast.show();
+}
+
+function agregarDesdeCatalogo(codigo) {
+    const servicio = servicios.find(s => s.codigo === codigo);
+    if (!servicio) return;
+
+    const agregado = agregarAlCarrito(servicio);
+    actualizarBadgeCarrito();
+    if (agregado) {
+        showToast(`"${servicio.nombre}" agregado al carrito`, "success");
+    } else {
+        showToast(`"${servicio.nombre}" ya está en el carrito`, "warning");
+    }
+}
+
+function renderCatalogo() {
     const container = document.getElementById("catalogo");
-    const filtrados = filtro === "todos" ? servicios : servicios.filter(s => s.tipo === filtro);
+    if (!container) return;
+
+    let filtrados = filtroTipoActivo === "todos"
+        ? [...servicios]
+        : servicios.filter(s => s.tipo === filtroTipoActivo);
+
+    filtrados = filtrados.filter(s => s.precio >= filtroPrecioMin && s.precio <= filtroPrecioMax);
+
+    if (filtrados.length === 0) {
+        container.innerHTML = `
+            <div class="text-center py-5 w-100">
+                <i class="bi bi-search text-muted" style="font-size: 3rem;"></i>
+                <h4 class="mt-3">No se encontraron servicios</h4>
+                <p class="text-muted">Intenta ajustar los filtros de búsqueda.</p>
+            </div>`;
+        return;
+    }
 
     container.innerHTML = filtrados.map(servicio => `
         <div class="col-md-6 col-lg-4">
@@ -194,7 +237,12 @@ function renderCatalogo(filtro = "todos") {
                     <p class="card-text flex-grow-1">${servicio.descripcion}</p>
                     <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top">
                         <span class="card-price">${formatPrecio(servicio.precio)}</span>
-                        <a href="detalle.html?id=${servicio.codigo}" class="btn btn-sm btn-outline-success">Ver más</a>
+                        <div class="d-flex gap-1">
+                            <button class="btn btn-sm btn-success" onclick="agregarDesdeCatalogo('${servicio.codigo}')" title="Agregar al carrito">
+                                <i class="bi bi-cart-plus"></i>
+                            </button>
+                            <a href="detalle.html?id=${servicio.codigo}" class="btn btn-sm btn-outline-success">Ver más</a>
+                        </div>
                     </div>
                     <div class="mt-2">
                         <small class="text-muted"><i class="bi bi-geo-alt me-1"></i>${servicio.modalidad}</small>
@@ -216,10 +264,65 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
                 e.target.classList.add("active");
                 e.target.classList.remove("btn-outline-success");
-                renderCatalogo(e.target.dataset.tipo);
+                filtroTipoActivo = e.target.dataset.tipo;
+                renderCatalogo();
             }
         });
     }
 
+    const minSlider = document.getElementById("precio-min");
+    const maxSlider = document.getElementById("precio-max");
+    const precioValor = document.getElementById("precio-valor");
+    const trackActivo = document.getElementById("dual-range-active");
+
+    function actualizarTrack() {
+        const min = Number(minSlider.value);
+        const max = Number(maxSlider.value);
+        const total = 170000 - 10000;
+        const left = ((min - 10000) / total) * 100;
+        const right = ((max - 10000) / total) * 100;
+        trackActivo.style.left = left + "%";
+        trackActivo.style.width = (right - left) + "%";
+    }
+
+    function actualizarRango() {
+        let min = Math.round(Number(minSlider.value) / 5000) * 5000;
+        let max = Math.round(Number(maxSlider.value) / 5000) * 5000;
+        if (min > max) {
+            [minSlider.value, maxSlider.value] = [max, min];
+            [min, max] = [max, min];
+        }
+        filtroPrecioMin = min;
+        filtroPrecioMax = max;
+        precioValor.textContent = formatPrecio(min) + " — " + formatPrecio(max);
+        actualizarTrack();
+        renderCatalogo();
+    }
+
+    minSlider.addEventListener("input", actualizarRango);
+    maxSlider.addEventListener("input", actualizarRango);
+    actualizarTrack();
+
+    document.getElementById("btn-reset")?.addEventListener("click", function () {
+        filtroTipoActivo = "todos";
+        filtroPrecioMin = 10000;
+        filtroPrecioMax = 170000;
+        minSlider.value = 10000;
+        maxSlider.value = 170000;
+        precioValor.textContent = formatPrecio(10000) + " — " + formatPrecio(170000);
+        actualizarTrack();
+
+        document.querySelectorAll("#filtros .btn").forEach(b => {
+            b.classList.remove("active");
+            b.classList.add("btn-outline-success");
+        });
+        const btnTodos = document.querySelector('#filtros .btn[data-tipo="todos"]');
+        btnTodos.classList.add("active");
+        btnTodos.classList.remove("btn-outline-success");
+
+        renderCatalogo();
+    });
+
     renderCatalogo();
+    actualizarBadgeCarrito();
 });

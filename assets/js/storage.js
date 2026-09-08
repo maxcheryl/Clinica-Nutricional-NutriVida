@@ -82,3 +82,12 @@ function vaciarCarrito() {
 function contarCarrito() {
     return obtenerCarrito().length;
 }
+
+function actualizarBadgeCarrito() {
+    const badges = document.querySelectorAll(".badge-carrito");
+    const cantidad = contarCarrito();
+    badges.forEach(badge => {
+        badge.textContent = cantidad;
+        badge.style.display = cantidad > 0 ? "inline" : "none";
+    });
+}

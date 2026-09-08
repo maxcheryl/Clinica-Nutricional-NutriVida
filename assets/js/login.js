@@ -54,3 +54,5 @@ formLogin.addEventListener("submit", function(evento) {
     // Redirigir a la página principal
     window.location.href = "/index.html"; 
 });
+
+actualizarBadgeCarrito();

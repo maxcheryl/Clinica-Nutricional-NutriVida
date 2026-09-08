@@ -94,6 +94,7 @@ function renderCarrito() {
 
 function eliminarServicio(codigo) {
     eliminarDelCarrito(codigo);
+    actualizarBadgeCarrito();
     renderCarrito();
 }
 
@@ -104,10 +105,12 @@ function mostrarModalVaciar() {
 
 function confirmarVaciar() {
     vaciarCarrito();
+    actualizarBadgeCarrito();
     bootstrap.Modal.getInstance(document.getElementById("modalVaciar")).hide();
     renderCarrito();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
     renderCarrito();
+    actualizarBadgeCarrito();
 });

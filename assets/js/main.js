@@ -28,6 +28,11 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     }
 
+    // BADGE CARRITO
+    if (typeof actualizarBadgeCarrito === "function") {
+        actualizarBadgeCarrito();
+    }
+
     // FORMULARIO DE CONTACTO
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {

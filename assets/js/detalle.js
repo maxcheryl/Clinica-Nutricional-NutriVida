@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <span class="card-price" style="font-size: 1.5rem;">${formatPrecio(servicio.precio)}</span>
                         </div>
 
-                        <button class="btn btn-success w-100" onclick="agregarYRedirigir(servicio)">
+                        <button class="btn btn-success w-100" data-codigo="${servicio.codigo}" onclick="agregarPorCodigo(this)">
                             <i class="bi bi-cart2 me-2"></i>Reservar
                         </button>
                     </div>
@@ -106,10 +106,14 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         </div>
     `;
+    actualizarBadgeCarrito();
 });
 
-function agregarYRedirigir(servicio) {
+function agregarPorCodigo(boton) {
+    const codigo = boton.dataset.codigo;
+    const servicio = servicios.find(s => s.codigo === codigo);
     const agregado = agregarAlCarrito(servicio);
+    actualizarBadgeCarrito();
     if (agregado) {
         window.location.href = "carrito.html";
     } else {

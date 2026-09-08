@@ -122,3 +122,5 @@ formulario.addEventListener("submit", function(evento){
         formulario.reset()
     }
 })
+
+actualizarBadgeCarrito();
