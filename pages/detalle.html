@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicios - Clínica NutriVida</title>
+    <title>Detalle del Servicio - Clínica NutriVida</title>
     <link rel="icon" type="png" href="../assets/img/favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -51,20 +51,7 @@
     <main class="pt-5">
         <section class="py-section">
             <div class="container">
-                <h2 class="section-title">Nuestros Servicios</h2>
-                <p class="section-subtitle">Encuentra la opción ideal para ti</p>
-
-                <!-- FILTROS -->
-                <div class="d-flex justify-content-center flex-wrap gap-2 mb-4" id="filtros">
-                    <button class="btn btn-success active" data-tipo="todos">Todos</button>
-                    <button class="btn btn-outline-success" data-tipo="Consulta">Consultas</button>
-                    <button class="btn btn-outline-success" data-tipo="Plan especializado">Planes</button>
-                    <button class="btn btn-outline-success" data-tipo="Evaluación">Evaluaciones</button>
-                    <button class="btn btn-outline-success" data-tipo="Taller grupal">Talleres</button>
-                </div>
-
-                <!-- CATÁLOGO -->
-                <div class="row g-4" id="catalogo"></div>
+                <div id="detalle-container"></div>
             </div>
         </section>
     </main>
@@ -106,7 +93,28 @@
         </div>
     </footer>
 
+    <!-- Modal servicio duplicado -->
+    <div class="modal fade" id="modalDuplicado" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Servicio ya agregado</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    Este servicio ya está en tu carrito.
+                </div>
+                <div class="modal-footer">
+                    <a href="carrito.html" class="btn btn-success">Ver carrito</a>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Seguir viendo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="../assets/js/storage.js"></script>
     <script src="../assets/js/servicios.js"></script>
+    <script src="../assets/js/detalle.js"></script>
 </body>
 </html>
