@@ -27,6 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.title = servicio.nombre + " - Clínica NutriVida";
 
+    const cupos = obtenerCupoDisponible(servicio.codigo);
+
     container.innerHTML = `
         <a href="servicios.html" class="btn btn-outline-success mb-4">
             <i class="bi bi-arrow-left me-1"></i>Volver a servicios
@@ -34,7 +36,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         <div class="row g-5 align-items-start">
             <div class="col-lg-7">
-                <span class="badge ${getBadgeClass(servicio.tipo)} mb-3">${servicio.tipo}</span>
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <span class="badge ${getBadgeClass(servicio.tipo)}">${servicio.tipo}</span>
+                    <span class="badge ${cupos > 0 ? 'bg-light text-success' : 'bg-danger'}">
+                        ${cupos > 0 ? cupos + ' cupos disponibles' : 'Sin cupos'}
+                    </span>
+                </div>
                 <h2 class="section-title text-start mb-3">${servicio.nombre}</h2>
                 <p class="lead mb-4">${servicio.descripcion}</p>
 
@@ -83,11 +90,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         <div class="d-flex align-items-center mb-3">
                             <div class="me-3">
-                                <i class="bi bi-person text-success" style="font-size: 1.5rem;"></i>
+                                <i class="bi bi-people text-success" style="font-size: 1.5rem;"></i>
                             </div>
                             <div>
-                                <strong>Profesional</strong>
-                                <p class="mb-0 text-muted">${servicio.profesional}</p>
+                                <strong>Cupos</strong>
+                                <p class="mb-0 text-muted">${cupos > 0 ? cupos + ' disponibles' : 'Sin cupos disponibles'}</p>
                             </div>
                         </div>
 
@@ -98,9 +105,14 @@ document.addEventListener("DOMContentLoaded", function () {
                             <span class="card-price" style="font-size: 1.5rem;">${formatPrecio(servicio.precio)}</span>
                         </div>
 
-                        <button class="btn btn-success w-100" data-codigo="${servicio.codigo}" onclick="agregarPorCodigo(this)">
-                            <i class="bi bi-cart2 me-2"></i>Reservar
-                        </button>
+                        ${cupos > 0
+                            ? `<button class="btn btn-success w-100" data-codigo="${servicio.codigo}" onclick="agregarPorCodigo(this)">
+                                    <i class="bi bi-cart2 me-2"></i>Reservar
+                               </button>`
+                            : `<button class="btn btn-secondary w-100" disabled>
+                                    <i class="bi bi-cart-x me-2"></i>Sin cupos disponibles
+                               </button>`
+                        }
                     </div>
                 </div>
             </div>
@@ -112,12 +124,14 @@ document.addEventListener("DOMContentLoaded", function () {
 function agregarPorCodigo(boton) {
     const codigo = boton.dataset.codigo;
     const servicio = servicios.find(s => s.codigo === codigo);
-    const agregado = agregarAlCarrito(servicio);
-    actualizarBadgeCarrito();
-    if (agregado) {
-        window.location.href = "carrito.html";
-    } else {
-        const modal = new bootstrap.Modal(document.getElementById("modalDuplicado"));
-        modal.show();
+
+    const disponibles = obtenerCupoDisponible(codigo);
+    if (disponibles <= 0) {
+        showToast("No hay cupos disponibles", "danger");
+        return;
     }
+
+    agregarAlCarrito(servicio);
+    actualizarBadgeCarrito();
+    window.location.href = "carrito.html";
 }

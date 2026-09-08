@@ -7,6 +7,7 @@ const servicios = [
         duracion: "50 min",
         modalidad: "Presencial",
         precio: 35000,
+        cuposIniciales: 5,
         descripcion: "Evaluación inicial: anamnesis, antropometría completa y diseño del primer plan alimenticio."
     },
     {
@@ -16,6 +17,7 @@ const servicios = [
         duracion: "30 min",
         modalidad: "Presencial",
         precio: 25000,
+        cuposIniciales: 5,
         descripcion: "Seguimiento mensual: medición de indicadores y ajuste del plan vigente."
     },
     {
@@ -25,6 +27,7 @@ const servicios = [
         duracion: "30 min",
         modalidad: "Presencial",
         precio: 22000,
+        cuposIniciales: 5,
         descripcion: "Seguimiento intensivo cada 15 días. Recomendado en los primeros 2 meses."
     },
     {
@@ -34,6 +37,7 @@ const servicios = [
         duracion: "30 min",
         modalidad: "Online (video)",
         precio: 20000,
+        cuposIniciales: 5,
         descripcion: "Consulta de seguimiento vía videollamada. Requiere contar con consulta presencial previa."
     },
     {
@@ -43,6 +47,7 @@ const servicios = [
         duracion: "30 min",
         modalidad: "Presencial",
         precio: 28000,
+        cuposIniciales: 5,
         descripcion: "Para pacientes que requieren atención fuera de su control habitual."
     },
     // PLANES ESPECIALIZADOS
@@ -53,6 +58,7 @@ const servicios = [
         duracion: "—",
         modalidad: "Presencial",
         precio: 65000,
+        cuposIniciales: 3,
         descripcion: "Incluye primera consulta + 1 control quincenal + plan alimenticio personalizado + seguimiento por WhatsApp."
     },
     {
@@ -62,6 +68,7 @@ const servicios = [
         duracion: "—",
         modalidad: "Presencial",
         precio: 170000,
+        cuposIniciales: 3,
         descripcion: "Incluye primera consulta + 5 controles + 3 planes mensuales + seguimiento continuo."
     },
     {
@@ -71,6 +78,7 @@ const servicios = [
         duracion: "—",
         modalidad: "Presencial",
         precio: 70000,
+        cuposIniciales: 3,
         descripcion: "Para deportistas y personas con actividad física frecuente. Cálculo de requerimientos energéticos y proteicos."
     },
     {
@@ -80,6 +88,7 @@ const servicios = [
         duracion: "—",
         modalidad: "Presencial",
         precio: 75000,
+        cuposIniciales: 3,
         descripcion: "Plan adaptado para patologías metabólicas. Coordinación con médico tratante si aplica."
     },
     {
@@ -89,6 +98,7 @@ const servicios = [
         duracion: "—",
         modalidad: "Presencial",
         precio: 68000,
+        cuposIniciales: 3,
         descripcion: "Diseñado para garantizar aporte adecuado de proteínas, hierro, vitamina B12 y calcio sin productos animales."
     },
     {
@@ -98,6 +108,7 @@ const servicios = [
         duracion: "—",
         modalidad: "Presencial",
         precio: 65000,
+        cuposIniciales: 3,
         descripcion: "Evaluación nutricional pediátrica y diseño de plan adaptado a la etapa de desarrollo del niño."
     },
     // EVALUACIONES
@@ -108,6 +119,7 @@ const servicios = [
         duracion: "20 min",
         modalidad: "Presencial",
         precio: 18000,
+        cuposIniciales: 8,
         descripcion: "Peso, talla, IMC, circunferencia de cintura, cadera, brazo y % de grasa corporal con bioimpedanciometría."
     },
     {
@@ -117,6 +129,7 @@ const servicios = [
         duracion: "15 min",
         modalidad: "Presencial",
         precio: 12000,
+        cuposIniciales: 8,
         descripcion: "Medición de composición corporal: masa grasa, masa muscular, agua corporal y edad metabólica."
     },
     {
@@ -126,6 +139,7 @@ const servicios = [
         duracion: "20 min",
         modalidad: "Presencial",
         precio: 10000,
+        cuposIniciales: 8,
         descripcion: "Análisis del patrón alimentario actual. Identificación de déficit y excesos nutricionales."
     },
     {
@@ -135,6 +149,7 @@ const servicios = [
         duracion: "20 min",
         modalidad: "Presencial",
         precio: 15000,
+        cuposIniciales: 8,
         descripcion: "Interpretación de hemograma, perfil bioquímico y lipídico en contexto nutricional."
     },
     // TALLERES GRUPALES
@@ -145,6 +160,7 @@ const servicios = [
         duracion: "90 min",
         modalidad: "Presencial (grupo)",
         precio: 15000,
+        cuposIniciales: 10,
         descripcion: "Máx. 10 personas. Conceptos básicos de alimentación equilibrada y lectura de etiquetas."
     },
     {
@@ -154,6 +170,7 @@ const servicios = [
         duracion: "120 min",
         modalidad: "Presencial (grupo)",
         precio: 20000,
+        cuposIniciales: 8,
         descripcion: "Preparación de recetas saludables. Incluye degustación. Máx. 8 personas."
     },
     {
@@ -163,6 +180,7 @@ const servicios = [
         duracion: "90 min",
         modalidad: "Presencial (grupo)",
         precio: 18000,
+        cuposIniciales: 12,
         descripcion: "Hidratación, nutrición pre y post entrenamiento, suplementación básica. Máx. 12 personas."
     }
 ];
@@ -199,13 +217,16 @@ function agregarDesdeCatalogo(codigo) {
     const servicio = servicios.find(s => s.codigo === codigo);
     if (!servicio) return;
 
-    const agregado = agregarAlCarrito(servicio);
-    actualizarBadgeCarrito();
-    if (agregado) {
-        showToast(`"${servicio.nombre}" agregado al carrito`, "success");
-    } else {
-        showToast(`"${servicio.nombre}" ya está en el carrito`, "warning");
+    const disponibles = obtenerCupoDisponible(codigo);
+    if (disponibles <= 0) {
+        showToast(`"${servicio.nombre}" no tiene cupos disponibles`, "danger");
+        return;
     }
+
+    agregarAlCarrito(servicio);
+    actualizarBadgeCarrito();
+    renderCatalogo();
+    showToast(`"${servicio.nombre}" agregado al carrito`, "success");
 }
 
 function renderCatalogo() {
@@ -228,19 +249,31 @@ function renderCatalogo() {
         return;
     }
 
-    container.innerHTML = filtrados.map(servicio => `
+    container.innerHTML = filtrados.map(servicio => {
+        const cupos = obtenerCupoDisponible(servicio.codigo);
+        return `
         <div class="col-md-6 col-lg-4">
             <div class="card card-servicio h-100">
                 <div class="card-body d-flex flex-column">
-                    <span class="badge ${getBadgeClass(servicio.tipo)} mb-2 align-self-start">${servicio.tipo}</span>
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge ${getBadgeClass(servicio.tipo)}">${servicio.tipo}</span>
+                        <span class="badge ${cupos > 0 ? 'bg-light text-success' : 'bg-danger'}">
+                            ${cupos > 0 ? cupos + ' cupos' : 'Agotado'}
+                        </span>
+                    </div>
                     <h5 class="card-title">${servicio.nombre}</h5>
                     <p class="card-text flex-grow-1">${servicio.descripcion}</p>
                     <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top">
                         <span class="card-price">${formatPrecio(servicio.precio)}</span>
                         <div class="d-flex gap-1">
-                            <button class="btn btn-sm btn-success" onclick="agregarDesdeCatalogo('${servicio.codigo}')" title="Agregar al carrito">
-                                <i class="bi bi-cart-plus"></i>
-                            </button>
+                            ${cupos > 0
+                                ? `<button class="btn btn-sm btn-success" onclick="agregarDesdeCatalogo('${servicio.codigo}')" title="Agregar al carrito">
+                                        <i class="bi bi-cart-plus"></i>
+                                   </button>`
+                                : `<button class="btn btn-sm btn-secondary" disabled title="Sin cupos">
+                                        <i class="bi bi-cart-x"></i>
+                                   </button>`
+                            }
                             <a href="detalle.html?id=${servicio.codigo}" class="btn btn-sm btn-outline-success">Ver más</a>
                         </div>
                     </div>
@@ -249,8 +282,8 @@ function renderCatalogo() {
                     </div>
                 </div>
             </div>
-        </div>
-    `).join("");
+        </div>`;
+    }).join("");
 }
 
 document.addEventListener("DOMContentLoaded", function () {

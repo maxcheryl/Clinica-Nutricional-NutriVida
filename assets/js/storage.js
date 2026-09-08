@@ -61,18 +61,31 @@ function guardarCarrito(carrito) {
 function agregarAlCarrito(servicio) {
     const carrito = obtenerCarrito();
     const existe = carrito.find(item => item.codigo === servicio.codigo);
-    if (!existe) {
-        carrito.push(servicio);
-        guardarCarrito(carrito);
-        return true;
+    if (existe) {
+        existe.cantidad++;
+    } else {
+        carrito.push({ ...servicio, cantidad: 1 });
     }
-    return false;
+    guardarCarrito(carrito);
+    return true;
+}
+
+function reducirCantidad(codigo) {
+    const carrito = obtenerCarrito();
+    const item = carrito.find(i => i.codigo === codigo);
+    if (item) {
+        item.cantidad--;
+        if (item.cantidad <= 0) {
+            guardarCarrito(carrito.filter(i => i.codigo !== codigo));
+        } else {
+            guardarCarrito(carrito);
+        }
+    }
 }
 
 function eliminarDelCarrito(codigo) {
-    const carrito = obtenerCarrito();
-    const filtrado = carrito.filter(item => item.codigo !== codigo);
-    guardarCarrito(filtrado);
+    const carrito = obtenerCarrito().filter(i => i.codigo !== codigo);
+    guardarCarrito(carrito);
 }
 
 function vaciarCarrito() {
@@ -80,7 +93,23 @@ function vaciarCarrito() {
 }
 
 function contarCarrito() {
+    return obtenerCarrito().reduce((sum, item) => sum + item.cantidad, 0);
+}
+
+function serviciosEnCarrito() {
     return obtenerCarrito().length;
+}
+
+// ==================== CUPOS ====================
+function cantidadEnCarrito(codigo) {
+    const item = obtenerCarrito().find(i => i.codigo === codigo);
+    return item ? item.cantidad : 0;
+}
+
+function obtenerCupoDisponible(codigo) {
+    const servicio = servicios.find(s => s.codigo === codigo);
+    if (!servicio) return 0;
+    return servicio.cuposIniciales - cantidadEnCarrito(codigo);
 }
 
 function actualizarBadgeCarrito() {

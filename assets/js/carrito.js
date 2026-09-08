@@ -19,7 +19,8 @@ function renderCarrito() {
         return;
     }
 
-    const total = carrito.reduce((sum, s) => sum + s.precio, 0);
+    const total = carrito.reduce((sum, s) => sum + (s.precio * s.cantidad), 0);
+    const totalUnidades = carrito.reduce((sum, s) => sum + s.cantidad, 0);
 
     container.innerHTML = `
         <div class="row g-4">
@@ -32,8 +33,8 @@ function renderCarrito() {
                                     <tr>
                                         <th>Servicio</th>
                                         <th>Tipo</th>
-                                        <th>Modalidad</th>
-                                        <th class="text-end">Precio</th>
+                                        <th class="text-center">Cantidad</th>
+                                        <th class="text-end">Subtotal</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -45,10 +46,19 @@ function renderCarrito() {
                                                 <br><small class="text-muted">${servicio.descripcion.substring(0, 60)}...</small>
                                             </td>
                                             <td><span class="badge ${getBadgeClass(servicio.tipo)}">${servicio.tipo}</span></td>
-                                            <td><small class="text-muted">${servicio.modalidad}</small></td>
-                                            <td class="text-end"><strong>${formatPrecio(servicio.precio)}</strong></td>
+                                            <td class="text-center">
+                                                <div class="d-flex align-items-center justify-content-center gap-1">
+                                                    <button class="btn btn-sm btn-outline-secondary" onclick="reducirDesdeCarrito('${servicio.codigo}')" title="Reducir">−</button>
+                                                    <span class="mx-2 fw-bold">${servicio.cantidad}</span>
+                                                    ${obtenerCupoDisponible(servicio.codigo) > 0
+                                                        ? `<button class="btn btn-sm btn-outline-secondary" onclick="agregarDesdeCarrito('${servicio.codigo}')" title="Aumentar">+</button>`
+                                                        : `<button class="btn btn-sm btn-outline-secondary" disabled title="Sin cupos disponibles">+</button>`
+                                                    }
+                                                </div>
+                                            </td>
+                                            <td class="text-end"><strong>${formatPrecio(servicio.precio * servicio.cantidad)}</strong></td>
                                             <td class="text-end">
-                                                <button class="btn btn-sm btn-outline-danger" onclick="eliminarServicio('${servicio.codigo}')" title="Eliminar">
+                                                <button class="btn btn-sm btn-outline-danger" onclick="eliminarDelCarritoCompleto('${servicio.codigo}')" title="Eliminar">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
                                             </td>
@@ -66,8 +76,8 @@ function renderCarrito() {
                     <div class="card-body p-4">
                         <h5 class="mb-3">Resumen</h5>
                         <div class="d-flex justify-content-between mb-2">
-                            <span>Servicios (${carrito.length})</span>
-                            <strong>${formatPrecio(total)}</strong>
+                            <span>Servicios (${serviciosEnCarrito()})</span>
+                            <span>${totalUnidades} unidades</span>
                         </div>
                         <hr>
                         <div class="d-flex justify-content-between mb-3">
@@ -92,10 +102,28 @@ function renderCarrito() {
     `;
 }
 
-function eliminarServicio(codigo) {
-    eliminarDelCarrito(codigo);
-    actualizarBadgeCarrito();
+function agregarDesdeCarrito(codigo) {
+    const disponibles = obtenerCupoDisponible(codigo);
+    if (disponibles <= 0) {
+        showToast("No hay más cupos disponibles", "warning");
+        return;
+    }
+    const servicio = servicios.find(s => s.codigo === codigo);
+    agregarAlCarrito(servicio);
     renderCarrito();
+    actualizarBadgeCarrito();
+}
+
+function reducirDesdeCarrito(codigo) {
+    reducirCantidad(codigo);
+    renderCarrito();
+    actualizarBadgeCarrito();
+}
+
+function eliminarDelCarritoCompleto(codigo) {
+    eliminarDelCarrito(codigo);
+    renderCarrito();
+    actualizarBadgeCarrito();
 }
 
 function confirmarReserva() {
