@@ -56,3 +56,4 @@ formLogin.addEventListener("submit", function(evento) {
 });
 
 actualizarBadgeCarrito();
+actualizarNavbar();

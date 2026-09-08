@@ -1,7 +1,3 @@
-function formatPrecio(precio) {
-    return "$" + precio.toLocaleString("es-CL");
-}
-
 function renderCarrito() {
     const container = document.getElementById("carrito-container");
     const carrito = obtenerCarrito();
@@ -157,4 +153,5 @@ function confirmarVaciar() {
 document.addEventListener("DOMContentLoaded", function () {
     renderCarrito();
     actualizarBadgeCarrito();
+    actualizarNavbar();
 });

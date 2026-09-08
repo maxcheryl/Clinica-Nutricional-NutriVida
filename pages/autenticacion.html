@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión</title>
-    <link rel="icon" type="png" href="/assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="/assets/img/icons/favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
@@ -16,7 +16,7 @@
         <nav class="navbar navbar-expand-lg navbar-light fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="/index.html">
-                    <img src="/assets/img/logo.png" alt="NutriVida" class="brand-logo">
+                    <img src="/assets/img/icons/logo.png" alt="NutriVida" class="brand-logo">
                     <span class="brand-text">Clínica NutriVida</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -38,8 +38,14 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="autenticacion.html">Iniciar Sesión</a>
+                        <li class="nav-item" id="botonIniciarSesion">
+                            <a class="nav-link" href="autenticacion.html">Iniciar Sesión</a>
+                        </li>
+                        <li class="nav-item d-none" id="infoUsuario">
+                            <span class="nav-link" id="nombreUsuario"></span>
+                        </li>
+                        <li class="nav-item d-none mb-2" id="botonCerrarSesion">
+                            <button type="button" id="btnCerrarSesion" class="btn btn-success ms-lg-2">Cerrar sesión</button>
                         </li>
                         <li class="nav-item">
                             <a class="btn btn-success ms-lg-2" href="carrito.html"><i class="bi bi-cart2 me-2"></i>Mi reserva <span class="badge bg-danger rounded-pill ms-1 badge-carrito" style="display:none;">0</span></a>

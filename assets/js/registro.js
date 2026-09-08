@@ -124,3 +124,4 @@ formulario.addEventListener("submit", function(evento){
 })
 
 actualizarBadgeCarrito();
+actualizarNavbar();

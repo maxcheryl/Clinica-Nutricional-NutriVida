@@ -185,10 +185,6 @@ const servicios = [
     }
 ];
 
-function formatPrecio(precio) {
-    return "$" + precio.toLocaleString("es-CL");
-}
-
 function getBadgeClass(tipo) {
     const classes = {
         "Consulta": "bg-success",
@@ -358,4 +354,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
     renderCatalogo();
     actualizarBadgeCarrito();
+    actualizarNavbar();
 });

@@ -20,13 +20,6 @@ function agregarUsuario(usuario){
     guardarUsuarios(usuarios);
 }
 
-function buscarUsuarioPorId(id) {
-    const usuarios = obtenerUsuarios();
-    return usuarios.find(function (usuario) {
-        return usuario.id === id;
-    });
-}
-
 function buscarUsuarioPorCorreo(correo) {
     const usuarios = obtenerUsuarios();
     return usuarios.find(function(usuario) {
@@ -119,4 +112,37 @@ function actualizarBadgeCarrito() {
         badge.textContent = cantidad;
         badge.style.display = cantidad > 0 ? "inline" : "none";
     });
+}
+
+// ==================== UTILIDADES ====================
+function formatPrecio(precio) {
+    return "$" + precio.toLocaleString("es-CL");
+}
+
+// ==================== NAVBAR ====================
+function actualizarNavbar() {
+    const usuarioLogueado = obtenerUsuarioLogueado();
+    const botonIniciarSesion = document.getElementById("botonIniciarSesion");
+    const infoUsuario = document.getElementById("infoUsuario");
+    const botonCerrarSesion = document.getElementById("botonCerrarSesion");
+    const nombreUsuario = document.getElementById("nombreUsuario");
+    const btnCerrarSesion = document.getElementById("btnCerrarSesion");
+
+    if (usuarioLogueado) {
+        if (botonIniciarSesion) botonIniciarSesion.classList.add("d-none");
+        if (infoUsuario) infoUsuario.classList.remove("d-none");
+        if (botonCerrarSesion) botonCerrarSesion.classList.remove("d-none");
+        if (nombreUsuario) nombreUsuario.textContent = `Hola, ${usuarioLogueado.nombre}`;
+    } else {
+        if (botonIniciarSesion) botonIniciarSesion.classList.remove("d-none");
+        if (infoUsuario) infoUsuario.classList.add("d-none");
+        if (botonCerrarSesion) botonCerrarSesion.classList.add("d-none");
+    }
+
+    if (btnCerrarSesion) {
+        btnCerrarSesion.addEventListener("click", function (e) {
+            e.preventDefault();
+            cerrarSesion();
+        });
+    }
 }

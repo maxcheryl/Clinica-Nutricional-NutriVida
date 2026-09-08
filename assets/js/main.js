@@ -33,6 +33,11 @@ document.addEventListener('DOMContentLoaded', function () {
         actualizarBadgeCarrito();
     }
 
+    // NAVBAR
+    if (typeof actualizarNavbar === "function") {
+        actualizarNavbar();
+    }
+
     // FORMULARIO DE CONTACTO
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
@@ -53,5 +58,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-
-const CLAVE_STORAGE = ""

@@ -29,9 +29,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const cupos = obtenerCupoDisponible(servicio.codigo);
 
+    const imagenesTipo = {
+        "Consulta": "../assets/img/consulta.png",
+        "Plan especializado": "../assets/img/plan.png",
+        "Evaluación": "../assets/img/evaluacion.png",
+        "Taller grupal": "../assets/img/taller.png"
+    };
+    const imagenTipo = imagenesTipo[servicio.tipo] || null;
+
     container.innerHTML = `
         <a href="servicios.html" class="btn btn-outline-success mb-4">
-            <i class="bi bi-arrow-left me-1"></i>Volver a servicios
+            <i class="bi bi-arrow-left me-1"></i>Más servicios
         </a>
 
         <div class="row g-5 align-items-start">
@@ -44,6 +52,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
                 <h2 class="section-title text-start mb-3">${servicio.nombre}</h2>
                 <p class="lead mb-4">${servicio.descripcion}</p>
+
+                ${imagenTipo
+                    ? `<img src="${imagenTipo}" alt="${servicio.tipo}" class="img-fluid rounded mb-4" style="max-height: 300px; width: 100%; object-fit: cover;">`
+                    : ''
+                }
 
                 <div class="card card-servicio mt-4">
                     <div class="card-body p-4">
@@ -119,6 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
     `;
     actualizarBadgeCarrito();
+    actualizarNavbar();
 });
 
 function agregarPorCodigo(boton) {
