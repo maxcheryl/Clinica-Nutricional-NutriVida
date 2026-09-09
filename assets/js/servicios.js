@@ -187,23 +187,34 @@ const servicios = [
 
 function getBadgeClass(tipo) {
     const classes = {
-        "Consulta": "bg-success",
-        "Plan especializado": "bg-primary",
+        "Consulta": "bg-success text-white",
+        "Plan especializado": "bg-primary text-white",
         "Evaluación": "bg-warning text-dark",
         "Taller grupal": "bg-info text-dark"
     };
-    return classes[tipo] || "bg-secondary";
+    return classes[tipo] || "bg-secondary text-white";
+}
+
+function getTipoIcon(tipo) {
+    const icons = {
+        "Consulta": "bi-person-heart",
+        "Plan especializado": "bi-journal-medical",
+        "Evaluación": "bi-clipboard2-pulse",
+        "Taller grupal": "bi-people"
+    };
+    return icons[tipo] || "bi-tag";
 }
 
 let filtroTipoActivo = "todos";
 let filtroPrecioMin = 10000;
 let filtroPrecioMax = 170000;
+let filtroBusqueda = "";
 
 function showToast(mensaje, tipo) {
     const toast = document.getElementById("toast-carrito");
     const body = document.getElementById("toast-carrito-body");
     if (!toast || !body) return;
-    toast.className = `toast align-items-center text-bg-${tipo} border-0`;
+    toast.className = `toast align-items-center text-bg-${tipo} border-0 shadow-lg`;
     body.textContent = mensaje;
     const bsToast = new bootstrap.Toast(toast, { delay: 2500 });
     bsToast.show();
@@ -222,7 +233,7 @@ function agregarDesdeCatalogo(codigo) {
     agregarAlCarrito(servicio);
     actualizarBadgeCarrito();
     renderCatalogo();
-    showToast(`"${servicio.nombre}" agregado al carrito`, "success");
+    showToast(`"${servicio.nombre}" agregado a tu reserva`, "success");
 }
 
 function renderCatalogo() {
@@ -235,46 +246,90 @@ function renderCatalogo() {
 
     filtrados = filtrados.filter(s => s.precio >= filtroPrecioMin && s.precio <= filtroPrecioMax);
 
+    if (filtroBusqueda.trim() !== "") {
+        const q = filtroBusqueda.toLowerCase().trim();
+        filtrados = filtrados.filter(s =>
+            s.nombre.toLowerCase().includes(q) ||
+            s.descripcion.toLowerCase().includes(q) ||
+            s.tipo.toLowerCase().includes(q) ||
+            s.modalidad.toLowerCase().includes(q)
+        );
+    }
+
+    const contador = document.getElementById("contador-servicios");
+    if (contador) {
+        contador.innerHTML = `<strong class="text-dark">${filtrados.length}</strong> ${filtrados.length === 1 ? 'servicio disponible' : 'servicios disponibles'}`;
+    }
+
     if (filtrados.length === 0) {
         container.innerHTML = `
-            <div class="text-center py-5 w-100">
-                <i class="bi bi-search text-muted" style="font-size: 3rem;"></i>
-                <h4 class="mt-3">No se encontraron servicios</h4>
-                <p class="text-muted">Intenta ajustar los filtros de búsqueda.</p>
+            <div class="col-12 text-center py-5">
+                <div class="p-5 bg-white rounded-4 shadow-sm border">
+                    <i class="bi bi-search text-muted" style="font-size: 3rem;"></i>
+                    <h4 class="mt-3 fw-bold text-dark">No se encontraron servicios</h4>
+                    <p class="text-muted mb-4">No hay resultados que coincidan con tu búsqueda o los filtros seleccionados.</p>
+                    <button class="btn btn-outline-success rounded-pill px-4" onclick="document.getElementById('btn-reset').click()">
+                        <i class="bi bi-arrow-counterclockwise me-1"></i>Restablecer filtros
+                    </button>
+                </div>
             </div>`;
         return;
     }
 
     container.innerHTML = filtrados.map(servicio => {
         const cupos = obtenerCupoDisponible(servicio.codigo);
+        const hayCupos = cupos > 0;
         return `
         <div class="col-md-6 col-lg-4">
-            <div class="card card-servicio h-100">
-                <div class="card-body d-flex flex-column">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <span class="badge ${getBadgeClass(servicio.tipo)}">${servicio.tipo}</span>
-                        <span class="badge ${cupos > 0 ? 'bg-light text-success' : 'bg-danger'}">
-                            ${cupos > 0 ? cupos + ' cupos' : 'Agotado'}
+            <div class="card card-catalogo h-100">
+                <div class="card-body d-flex flex-column p-4">
+                    <!-- ENCABEZADO: TIPO Y CUPOS -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="badge ${getBadgeClass(servicio.tipo)} rounded-pill px-3 py-1">
+                            <i class="bi ${getTipoIcon(servicio.tipo)} me-1"></i>${servicio.tipo}
+                        </span>
+                        <span class="badge ${hayCupos ? 'bg-success-subtle text-success border border-success-subtle' : 'bg-danger-subtle text-danger border border-danger-subtle'} rounded-pill px-2 py-1">
+                            <i class="bi ${hayCupos ? 'bi-check-circle' : 'bi-x-circle'} me-1"></i>${hayCupos ? cupos + ' cupos' : 'Agotado'}
                         </span>
                     </div>
-                    <h5 class="card-title">${servicio.nombre}</h5>
-                    <p class="card-text flex-grow-1">${servicio.descripcion}</p>
-                    <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top">
-                        <span class="card-price">${formatPrecio(servicio.precio)}</span>
-                        <div class="d-flex gap-1">
-                            ${cupos > 0
-                                ? `<button class="btn btn-sm btn-success" onclick="agregarDesdeCatalogo('${servicio.codigo}')" title="Agregar al carrito">
-                                        <i class="bi bi-cart-plus"></i>
+
+                    <!-- TÍTULO -->
+                    <h5 class="card-title fw-bold text-dark mb-2">${servicio.nombre}</h5>
+
+                    <!-- ETIQUETAS: DURACIÓN Y MODALIDAD -->
+                    <div class="d-flex flex-wrap gap-2 mb-3">
+                        ${servicio.duracion && servicio.duracion !== '—' ? `
+                            <span class="badge bg-light text-secondary border fw-normal">
+                                <i class="bi bi-clock me-1 text-primary"></i>${servicio.duracion}
+                            </span>
+                        ` : ''}
+                        <span class="badge bg-light text-secondary border fw-normal">
+                            <i class="bi bi-geo-alt me-1 text-success"></i>${servicio.modalidad}
+                        </span>
+                    </div>
+
+                    <!-- DESCRIPCIÓN -->
+                    <p class="card-text text-secondary small flex-grow-1 mb-4">${servicio.descripcion}</p>
+
+                    <!-- PRECIO Y BOTONES DE ACCIÓN -->
+                    <div class="d-flex justify-content-between align-items-center pt-3 border-top mt-auto">
+                        <div>
+                            <span class="d-block text-muted small" style="font-size: 0.75rem;">Valor</span>
+                            <span class="fs-5 fw-bold text-dark">${formatPrecio(servicio.precio)}</span>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <a href="detalle.html?id=${servicio.codigo}" class="btn btn-sm btn-outline-secondary rounded-pill px-3" title="Ver detalles de ${servicio.nombre}">
+                                Detalle
+                            </a>
+                            ${hayCupos
+                                ? `<button class="btn btn-sm btn-success rounded-pill px-3 d-flex align-items-center gap-1" onclick="agregarDesdeCatalogo('${servicio.codigo}')" title="Agregar a reserva">
+                                        <i class="bi bi-cart-plus"></i> Reservar
                                    </button>`
-                                : `<button class="btn btn-sm btn-secondary" disabled title="Sin cupos">
-                                        <i class="bi bi-cart-x"></i>
+                                : `<button class="btn btn-sm btn-secondary rounded-pill px-3 disabled" disabled title="Sin cupos disponibles">
+                                        <i class="bi bi-x-circle"></i> Agotado
                                    </button>`
                             }
-                            <a href="detalle.html?id=${servicio.codigo}" class="btn btn-sm btn-outline-success">Ver más</a>
                         </div>
-                    </div>
-                    <div class="mt-2">
-                        <small class="text-muted"><i class="bi bi-geo-alt me-1"></i>${servicio.modalidad}</small>
                     </div>
                 </div>
             </div>
@@ -283,28 +338,60 @@ function renderCatalogo() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    const filtrosContainer = document.getElementById("filtros");
-    if (filtrosContainer) {
-        filtrosContainer.addEventListener("click", function (e) {
-            if (e.target.dataset.tipo) {
-                document.querySelectorAll("#filtros .btn").forEach(b => {
-                    b.classList.remove("active");
-                    b.classList.add("btn-outline-success");
-                });
-                e.target.classList.add("active");
-                e.target.classList.remove("btn-outline-success");
-                filtroTipoActivo = e.target.dataset.tipo;
-                renderCatalogo();
-            }
+    // SELECTOR DESPLEGABLE DE CATEGORÍA
+    const selectCategoria = document.getElementById("filtro-categoria");
+    if (selectCategoria) {
+        selectCategoria.addEventListener("change", function () {
+            filtroTipoActivo = this.value;
+            renderCatalogo();
         });
     }
 
+    // SOPORTE COMPATIBLE PARA BOTONES DE CATEGORÍA SI EXISTEN
+    const filtrosContainer = document.getElementById("filtros");
+    if (filtrosContainer) {
+        filtrosContainer.addEventListener("click", function (e) {
+            const btn = e.target.closest("button[data-tipo]");
+            if (!btn) return;
+            document.querySelectorAll("#filtros .btn").forEach(b => {
+                b.classList.remove("active", "btn-success");
+                b.classList.add("btn-outline-success");
+            });
+            btn.classList.add("active", "btn-success");
+            btn.classList.remove("btn-outline-success");
+            filtroTipoActivo = btn.dataset.tipo;
+            if (selectCategoria) selectCategoria.value = filtroTipoActivo;
+            renderCatalogo();
+        });
+    }
+
+    // BUSCADOR EN TIEMPO REAL
+    const buscador = document.getElementById("buscador-servicio");
+    if (buscador) {
+        buscador.addEventListener("input", function (e) {
+            filtroBusqueda = e.target.value;
+            renderCatalogo();
+        });
+    }
+
+    // DESLIZADOR DE PRECIO
     const minSlider = document.getElementById("precio-min");
     const maxSlider = document.getElementById("precio-max");
     const precioValor = document.getElementById("precio-valor");
     const trackActivo = document.getElementById("dual-range-active");
 
+    // Deslizador único compacto
+    if (maxSlider && !minSlider && precioValor) {
+        maxSlider.addEventListener("input", function () {
+            filtroPrecioMax = Number(this.value);
+            precioValor.textContent = formatPrecio(filtroPrecioMax);
+            renderCatalogo();
+        });
+    }
+
+    // Deslizador dual (compatibilidad)
     function actualizarTrack() {
+        if (!minSlider || !maxSlider || !trackActivo) return;
         const min = Number(minSlider.value);
         const max = Number(maxSlider.value);
         const total = 170000 - 10000;
@@ -315,6 +402,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function actualizarRango() {
+        if (!minSlider || !maxSlider || !precioValor) return;
         let min = Math.round(Number(minSlider.value) / 5000) * 5000;
         let max = Math.round(Number(maxSlider.value) / 5000) * 5000;
         if (min > max) {
@@ -328,26 +416,35 @@ document.addEventListener("DOMContentLoaded", function () {
         renderCatalogo();
     }
 
-    minSlider.addEventListener("input", actualizarRango);
-    maxSlider.addEventListener("input", actualizarRango);
-    actualizarTrack();
+    if (minSlider && maxSlider) {
+        minSlider.addEventListener("input", actualizarRango);
+        maxSlider.addEventListener("input", actualizarRango);
+        actualizarTrack();
+    }
 
+    // BOTÓN RESETEAR FILTROS
     document.getElementById("btn-reset")?.addEventListener("click", function () {
         filtroTipoActivo = "todos";
         filtroPrecioMin = 10000;
         filtroPrecioMax = 170000;
-        minSlider.value = 10000;
-        maxSlider.value = 170000;
-        precioValor.textContent = formatPrecio(10000) + " — " + formatPrecio(170000);
+        filtroBusqueda = "";
+
+        if (buscador) buscador.value = "";
+        if (selectCategoria) selectCategoria.value = "todos";
+        if (minSlider) minSlider.value = 10000;
+        if (maxSlider) maxSlider.value = 170000;
+        if (precioValor) precioValor.textContent = formatPrecio(170000);
         actualizarTrack();
 
         document.querySelectorAll("#filtros .btn").forEach(b => {
-            b.classList.remove("active");
+            b.classList.remove("active", "btn-success");
             b.classList.add("btn-outline-success");
         });
         const btnTodos = document.querySelector('#filtros .btn[data-tipo="todos"]');
-        btnTodos.classList.add("active");
-        btnTodos.classList.remove("btn-outline-success");
+        if (btnTodos) {
+            btnTodos.classList.add("active", "btn-success");
+            btnTodos.classList.remove("btn-outline-success");
+        }
 
         renderCatalogo();
     });

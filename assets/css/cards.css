@@ -279,7 +279,7 @@
 .dual-range-container {
     position: relative;
     width: 100%;
-    max-width: 500px;
+    max-width: 100%;
     margin: 0 auto;
     height: 40px;
 }
@@ -340,3 +340,79 @@
     pointer-events: all;
     border: none;
 }
+
+/* ESTILOS ESPECÍFICOS PARA PÁGINA SERVICIOS */
+.servicios-hero {
+    border-bottom: 1px solid var(--border);
+    padding: 3.5rem 0 2.5rem;
+}
+
+.servicios-filtros-card {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.card-catalogo {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background-color: var(--white);
+    box-shadow: var(--shadow);
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.card-catalogo:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08) !important;
+    border-color: rgba(116, 192, 86, 0.5);
+}
+
+.card-catalogo .card-body {
+    text-align: left;
+}
+
+#filtros .btn * {
+    pointer-events: none;
+}
+
+/* Rango de precio simple (Bootstrap form-range) */
+.form-range::-webkit-slider-thumb {
+    background-color: var(--secondary);
+}
+
+.form-range::-webkit-slider-thumb:active {
+    background-color: var(--secondary-dark);
+}
+
+.form-range::-moz-range-thumb {
+    background-color: var(--secondary);
+}
+
+.form-range::-moz-range-thumb:active {
+    background-color: var(--secondary-dark);
+}
+
+/* DETALLE DE SERVICIO (pages/detalle.html) */
+.card-detalle {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background-color: var(--white);
+    box-shadow: var(--shadow);
+}
+
+.card-detalle .card-body {
+    text-align: left;
+}
+
+.detalle-img-frame {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background-color: #f8faf9;
+}
+
+
+
+
+

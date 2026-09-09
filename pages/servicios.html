@@ -55,39 +55,114 @@
     </header>
 
     <main class="pt-5">
-        <section class="py-section">
+        <!-- HERO / ENCABEZADO DE SERVICIOS -->
+        <section class="servicios-hero mt-3">
+            <div class="container text-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center mb-2">
+                        <li class="breadcrumb-item"><a href="../index.html" class="text-decoration-none text-muted"><i class="bi bi-house-door me-1"></i>Inicio</a></li>
+                        <li class="breadcrumb-item active text-success fw-semibold" aria-current="page">Servicios</li>
+                    </ol>
+                </nav>
+                <h1 class="section-title mb-2">Nuestros Servicios</h1>
+                <p class="section-subtitle mb-3">Encuentra la atención nutricional personalizada que se adapta a tus metas y estilo de vida</p>
+
+                <!-- DESTACADOS DE CONFIANZA -->
+                <div class="d-flex justify-content-center flex-wrap gap-2 pt-1">
+                    <span class="badge bg-white text-secondary border shadow-sm px-3 py-2 rounded-pill">
+                        <i class="bi bi-shield-check text-success me-1"></i> Profesionales acreditados
+                    </span>
+                    <span class="badge bg-white text-secondary border shadow-sm px-3 py-2 rounded-pill">
+                        <i class="bi bi-camera-video text-success me-1"></i> Presencial y Online
+                    </span>
+                    <span class="badge bg-white text-secondary border shadow-sm px-3 py-2 rounded-pill">
+                        <i class="bi bi-heart-pulse text-success me-1"></i> Planes a tu medida
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN PRINCIPAL: FILTROS Y CATÁLOGO -->
+        <section class="py-5">
             <div class="container">
-                <h2 class="section-title">Nuestros Servicios</h2>
-                <p class="section-subtitle">Encuentra la opción ideal para ti</p>
+                <!-- BARRA DE FILTROS COMPACTA (UNA SOLA FILA) -->
+                <div class="card border-0 shadow-sm rounded-4 p-3 mb-4 bg-white">
+                    <div class="row g-2 align-items-center">
+                        <!-- BUSCADOR -->
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0 text-muted">
+                                    <i class="bi bi-search"></i>
+                                </span>
+                                <input type="text" id="buscador-servicio" class="form-control bg-light border-start-0" placeholder="Buscar servicio...">
+                            </div>
+                        </div>
 
-                <!-- FILTROS POR TIPO -->
-                <div class="d-flex justify-content-center flex-wrap gap-2 mb-3" id="filtros">
-                    <button class="btn btn-success active" data-tipo="todos">Todos</button>
-                    <button class="btn btn-outline-success" data-tipo="Consulta">Consultas</button>
-                    <button class="btn btn-outline-success" data-tipo="Plan especializado">Planes</button>
-                    <button class="btn btn-outline-success" data-tipo="Evaluación">Evaluaciones</button>
-                    <button class="btn btn-outline-success" data-tipo="Taller grupal">Talleres</button>
+                        <!-- DESPLEGABLE DE CATEGORÍA -->
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0 text-muted">
+                                    <i class="bi bi-tag"></i>
+                                </span>
+                                <select id="filtro-categoria" class="form-select bg-light border-start-0" aria-label="Seleccionar categoría">
+                                    <option value="todos" selected>Todas las categorías</option>
+                                    <option value="Consulta">Consultas</option>
+                                    <option value="Plan especializado">Planes</option>
+                                    <option value="Evaluación">Evaluaciones</option>
+                                    <option value="Taller grupal">Talleres</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- DESLIZADOR DE PRECIO COMPACTO -->
+                        <div class="col-12 col-sm-8 col-lg-4">
+                            <div class="d-flex align-items-center gap-2 px-1">
+                                <span class="text-muted small text-nowrap">
+                                    Hasta: <strong id="precio-valor" class="text-success">$170.000</strong>
+                                </span>
+                                <input type="range" class="form-range flex-grow-1" id="precio-max" min="10000" max="170000" step="5000" value="170000" aria-label="Precio máximo">
+                            </div>
+                        </div>
+
+                        <!-- BOTÓN LIMPIAR -->
+                        <div class="col-12 col-sm-4 col-lg-2 text-sm-end">
+                            <button class="btn btn-outline-secondary rounded-pill w-100" id="btn-reset" title="Restablecer filtros">
+                                <i class="bi bi-arrow-counterclockwise me-1"></i>Limpiar
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- RANGO DE PRECIO -->
-                <div class="d-flex justify-content-center flex-wrap gap-3 mb-2 align-items-center">
-                    <label class="fw-bold text-muted small">Precio:</label>
-                    <span id="precio-valor" class="text-success fw-semibold">$10.000 — $170.000</span>
-                </div>
-                <div class="dual-range-container mb-4" id="rango-precio">
-                    <div class="dual-range-track"></div>
-                    <div class="dual-range-active" id="dual-range-active"></div>
-                    <input type="range" class="dual-range-input" id="precio-min" min="10000" max="170000" step="5000" value="10000">
-                    <input type="range" class="dual-range-input" id="precio-max" min="10000" max="170000" step="5000" value="170000">
-                </div>
-                <div class="text-center mb-4">
-                    <button class="btn btn-outline-secondary btn-sm" id="btn-reset">
-                        <i class="bi bi-arrow-counterclockwise me-1"></i>Resetear filtros
-                    </button>
+                <!-- BARRA DE INFORMACIÓN Y RESULTADOS -->
+                <div class="d-flex justify-content-between align-items-center mb-4 text-muted small">
+                    <span id="contador-servicios"><strong class="text-dark">18</strong> servicios disponibles</span>
+                    <span class="d-none d-sm-inline"><i class="bi bi-info-circle me-1"></i>Precios en pesos chilenos (CLP)</span>
                 </div>
 
-                <!-- CATÁLOGO -->
+                <!-- CATÁLOGO DE TARJETAS -->
                 <div class="row g-4" id="catalogo"></div>
+
+                <!-- ASESORÍA / DUDAS -->
+                <div class="card border-0 shadow-sm rounded-4 p-4 mt-5 bg-white">
+                    <div class="row align-items-center g-3">
+                        <div class="col-lg-8 text-center text-lg-start">
+                            <div class="d-flex align-items-center justify-content-center justify-content-lg-start gap-3 mb-2">
+                                <span class="d-inline-flex align-items-center justify-content-center bg-success-subtle text-success rounded-circle" style="width: 44px; height: 44px; flex-shrink: 0;">
+                                    <i class="bi bi-chat-dots fs-5"></i>
+                                </span>
+                                <h5 class="fw-bold mb-0 text-dark">¿Tienes dudas sobre qué servicio elegir?</h5>
+                            </div>
+                            <p class="text-muted mb-0 small">
+                                Nuestro equipo puede guiarte para seleccionar la opción más adecuada para tus necesidades de salud o rendimiento.
+                            </p>
+                        </div>
+                        <div class="col-lg-4 text-center text-lg-end">
+                            <a href="../index.html#contacto" class="btn btn-success rounded-pill px-4">
+                                <i class="bi bi-envelope me-1"></i>Contáctanos
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -133,11 +208,11 @@
     <script src="../assets/js/storage.js"></script>
     <script src="../assets/js/servicios.js"></script>
 
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-        <div id="toast-carrito" class="toast align-items-center border-0" role="alert">
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+        <div id="toast-carrito" class="toast align-items-center border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
                 <div class="toast-body" id="toast-carrito-body"></div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button>
             </div>
         </div>
     </div>

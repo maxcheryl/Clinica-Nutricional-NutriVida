@@ -55,10 +55,20 @@
     </header>
 
     <main class="pt-5">
-        <section class="py-section">
+        <section class="py-5 mt-2">
             <div class="container">
-                <h2 class="section-title">Mi Reserva</h2>
-                <p class="section-subtitle">Servicios seleccionados para tu consulta</p>
+                <!-- MIGAS DE PAN -->
+                <nav aria-label="breadcrumb" class="mb-2">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../index.html" class="text-decoration-none text-muted"><i class="bi bi-house-door me-1"></i>Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="servicios.html" class="text-decoration-none text-muted">Servicios</a></li>
+                        <li class="breadcrumb-item active text-success fw-semibold" aria-current="page">Mi reserva</li>
+                    </ol>
+                </nav>
+                <div class="mb-4">
+                    <h1 class="section-title text-start mb-1" style="font-family: 'Playfair Display', serif;">Mi Reserva</h1>
+                    <p class="text-muted mb-0">Revisa y confirma los servicios seleccionados para tu atención nutricional</p>
+                </div>
 
                 <div id="carrito-container"></div>
             </div>
@@ -105,17 +115,17 @@
     <!-- Modal confirmar vaciar -->
     <div class="modal fade" id="modalVaciar" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Vaciar carrito</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold text-dark"><i class="bi bi-trash text-danger me-2"></i>Vaciar carrito</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
-                <div class="modal-body">
-                    ¿Estás seguro de que deseas eliminar todos los servicios del carrito?
+                <div class="modal-body text-muted">
+                    ¿Estás seguro de que deseas eliminar todos los servicios de tu carrito de reservas?
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger" onclick="confirmarVaciar()">Vaciar</button>
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger rounded-pill px-4" onclick="confirmarVaciar()">Vaciar carrito</button>
                 </div>
             </div>
         </div>
@@ -124,17 +134,17 @@
     <!-- Modal login requerido -->
     <div class="modal fade" id="modalLoginRequerido" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Iniciar sesión requerido</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold text-dark"><i class="bi bi-person-lock text-warning me-2"></i>Inicio de sesión requerido</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
-                <div class="modal-body">
-                    Debes iniciar sesión para confirmar tu reserva.
+                <div class="modal-body text-muted">
+                    Debes iniciar sesión con tu cuenta para poder confirmar y registrar tu reserva.
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <a href="autenticacion.html" class="btn btn-success">Iniciar sesión</a>
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Cancelar</button>
+                    <a href="autenticacion.html" class="btn btn-success rounded-pill px-4">Iniciar sesión</a>
                 </div>
             </div>
         </div>
@@ -143,16 +153,27 @@
     <!-- Modal éxito reserva -->
     <div class="modal fade" id="modalExito" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-success text-white">
-                    <h5 class="modal-title"><i class="bi bi-check-circle me-2"></i>Reserva confirmada</h5>
+            <div class="modal-content rounded-4 border-0 shadow text-center p-4">
+                <div class="mb-3">
+                    <div class="bg-success-subtle text-success rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                        <i class="bi bi-check-circle fs-1"></i>
+                    </div>
                 </div>
-                <div class="modal-body text-center">
-                    ¡La(s) reserva(s) han sido agendadas exitosamente!
+                <h4 class="fw-bold text-dark mb-2">¡Reserva(s) confirmada!</h4>
+                <p class="text-muted mb-4">Tus servicios han sido agendados exitosamente. Te esperamos en Clínica NutriVida.</p>
+                <div>
+                    <button type="button" class="btn btn-success rounded-pill px-5" data-bs-dismiss="modal">Entendido</button>
                 </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Entendido</button>
-                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast de notificaciones -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+        <div id="toast-carrito" class="toast align-items-center border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="toast-carrito-body"></div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button>
             </div>
         </div>
     </div>
