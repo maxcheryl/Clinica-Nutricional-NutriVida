@@ -226,6 +226,7 @@ function eliminarDelCarritoCompleto(codigo) {
 }
 
 // ==================== RESERVA ====================
+// Flujo: validar login → transferir carrito a reservados → limpiar carrito → mostrar éxito
 function confirmarReserva() {
     const usuario = obtenerUsuarioLogueado();
     if (!usuario) {
@@ -237,6 +238,7 @@ function confirmarReserva() {
     const carrito = obtenerCarrito();
     const reservados = obtenerReservados();
 
+    // Acumular cantidades del carrito en el registro de reservados
     carrito.forEach(item => {
         reservados[item.codigo] = (reservados[item.codigo] || 0) + item.cantidad;
     });

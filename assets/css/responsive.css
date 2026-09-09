@@ -103,10 +103,6 @@
     }
 
     /* Auth */
-    .card-auth[style*="560px"] {
-        max-width: 100% !important;
-    }
-
     .card-auth .card-body {
         padding: 1.5rem;
     }

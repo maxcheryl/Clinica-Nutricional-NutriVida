@@ -155,6 +155,7 @@ function cantidadEnCarrito(codigo) {
     return item ? item.cantidad : 0;
 }
 
+// Calcula cupos disponibles restando del total: los que están en carrito y los ya reservados
 function obtenerCupoDisponible(codigo) {
     const servicio = servicios.find(s => s.codigo === codigo);
     if (!servicio) return 0;

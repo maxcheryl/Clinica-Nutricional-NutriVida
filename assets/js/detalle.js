@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
             </div>
 
-            <!-- SIDEBAR DE RESERVA (DERECHA - STICKY) -->
+            <!-- SIDEBAR DE RESERVA (DERECHA) -->
             <div class="col-lg-5 col-xl-4">
                 <div class="card card-detalle border-0 shadow-sm rounded-4 p-4 position-sticky" style="top: 90px;">
                     <span class="text-uppercase text-muted small fw-bold mb-1 d-block">Valor del servicio</span>

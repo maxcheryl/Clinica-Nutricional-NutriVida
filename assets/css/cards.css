@@ -424,3 +424,23 @@
     margin-top: 0.2rem;
 }
 
+/* ==================== UTILIDADES REUTILIZABLES ==================== */
+
+/* Icono circular para modales y badges (70px), icono con check verde*/
+.icon-circle {
+    width: 70px;
+    height: 70px;
+}
+
+/* Icono circular pequeño para inline items como tags de categoría (44px), icono de chat*/
+.icon-circle-sm {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+}
+
+/* Container de toast notifications - asegura z-index sobre modales, notificacion flotante*/
+.toast-container {
+    z-index: 1100;
+}
+

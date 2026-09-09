@@ -348,24 +348,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // SOPORTE COMPATIBLE PARA BOTONES DE CATEGORÍA SI EXISTEN
-    const filtrosContainer = document.getElementById("filtros");
-    if (filtrosContainer) {
-        filtrosContainer.addEventListener("click", function (e) {
-            const btn = e.target.closest("button[data-tipo]");
-            if (!btn) return;
-            document.querySelectorAll("#filtros .btn").forEach(b => {
-                b.classList.remove("active", "btn-success");
-                b.classList.add("btn-outline-success");
-            });
-            btn.classList.add("active", "btn-success");
-            btn.classList.remove("btn-outline-success");
-            filtroTipoActivo = btn.dataset.tipo;
-            if (selectCategoria) selectCategoria.value = filtroTipoActivo;
-            renderCatalogo();
-        });
-    }
-
     // BUSCADOR EN TIEMPO REAL
     const buscador = document.getElementById("buscador-servicio");
     if (buscador) {
@@ -376,51 +358,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // DESLIZADOR DE PRECIO
-    const minSlider = document.getElementById("precio-min");
     const maxSlider = document.getElementById("precio-max");
     const precioValor = document.getElementById("precio-valor");
-    const trackActivo = document.getElementById("dual-range-active");
 
-    // Deslizador único compacto
-    if (maxSlider && !minSlider && precioValor) {
+    // Deslizador único - actualiza filtro y muestra valor
+    if (maxSlider && precioValor) {
         maxSlider.addEventListener("input", function () {
             filtroPrecioMax = Number(this.value);
             precioValor.textContent = formatPrecio(filtroPrecioMax);
             renderCatalogo();
         });
-    }
-
-    // Deslizador dual (compatibilidad)
-    function actualizarTrack() {
-        if (!minSlider || !maxSlider || !trackActivo) return;
-        const min = Number(minSlider.value);
-        const max = Number(maxSlider.value);
-        const total = 170000 - 10000;
-        const left = ((min - 10000) / total) * 100;
-        const right = ((max - 10000) / total) * 100;
-        trackActivo.style.left = left + "%";
-        trackActivo.style.width = (right - left) + "%";
-    }
-
-    function actualizarRango() {
-        if (!minSlider || !maxSlider || !precioValor) return;
-        let min = Math.round(Number(minSlider.value) / 5000) * 5000;
-        let max = Math.round(Number(maxSlider.value) / 5000) * 5000;
-        if (min > max) {
-            [minSlider.value, maxSlider.value] = [max, min];
-            [min, max] = [max, min];
-        }
-        filtroPrecioMin = min;
-        filtroPrecioMax = max;
-        precioValor.textContent = formatPrecio(min) + " — " + formatPrecio(max);
-        actualizarTrack();
-        renderCatalogo();
-    }
-
-    if (minSlider && maxSlider) {
-        minSlider.addEventListener("input", actualizarRango);
-        maxSlider.addEventListener("input", actualizarRango);
-        actualizarTrack();
     }
 
     // BOTÓN RESETEAR FILTROS
