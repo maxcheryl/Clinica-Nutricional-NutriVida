@@ -1,3 +1,4 @@
+// ==================== RENDERIZADO ====================
 function renderCarrito() {
     const container = document.getElementById("carrito-container");
     const carrito = obtenerCarrito();
@@ -38,7 +39,9 @@ function renderCarrito() {
                             <i class="bi bi-trash3 me-1"></i>Vaciar carrito
                         </button>
                     </div>
-                    <div class="card-body p-0">
+
+                    <!-- TABLA DESKTOP -->
+                    <div class="card-body p-0 carrito-desktop-table d-none d-md-block">
                         <div class="table-responsive">
                             <table class="table align-middle mb-0">
                                 <thead class="table-light text-muted small text-uppercase">
@@ -54,7 +57,7 @@ function renderCarrito() {
                                         <tr class="border-bottom">
                                             <td class="ps-4 py-3">
                                                 <div class="d-flex align-items-center gap-3">
-                                                    <div class="bg-light rounded-3 text-success d-none d-sm-flex align-items-center justify-content-center" style="width: 44px; height: 44px; flex-shrink: 0;">
+                                                    <div class="bg-light rounded-3 text-success d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; flex-shrink: 0;">
                                                         <i class="bi ${getTipoIcon(servicio.tipo)} fs-5"></i>
                                                     </div>
                                                     <div>
@@ -99,20 +102,58 @@ function renderCarrito() {
                             </table>
                         </div>
                     </div>
+
+                    <!-- CARDS MOBILE -->
+                    <div class="card-body p-3 carrito-mobile-card d-md-none">
+                        ${carrito.map(servicio => `
+                            <div class="border rounded-3 p-3 mb-3">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <div class="flex-grow-1">
+                                        <a href="detalle.html?id=${servicio.codigo}" class="text-decoration-none text-dark fw-bold d-block mb-1">
+                                            ${servicio.nombre}
+                                        </a>
+                                        <div class="d-flex flex-wrap gap-2 align-items-center mb-2">
+                                            <span class="badge ${getBadgeClass(servicio.tipo)} rounded-pill">${servicio.tipo}</span>
+                                            <span class="text-muted small"><i class="bi bi-clock me-1"></i>${servicio.duracion}</span>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-danger border-0 rounded-circle flex-shrink-0 ms-2" style="width: 32px; height: 32px;" onclick="eliminarDelCarritoCompleto('${servicio.codigo}')" title="Eliminar">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-inline-flex align-items-center bg-light border rounded-pill px-2 py-1">
+                                        <button class="btn btn-sm btn-link text-dark p-0 px-2 text-decoration-none" onclick="reducirDesdeCarrito('${servicio.codigo}')" style="font-size: 1rem; line-height: 1;">
+                                            <i class="bi bi-dash-lg"></i>
+                                        </button>
+                                        <span class="fw-bold px-2 text-dark" style="min-width: 24px; text-align: center;">${servicio.cantidad}</span>
+                                        ${obtenerCupoDisponible(servicio.codigo) > 0
+                                            ? `<button class="btn btn-sm btn-link text-success p-0 px-2 text-decoration-none" onclick="agregarDesdeCarrito('${servicio.codigo}')" style="font-size: 1rem; line-height: 1;"><i class="bi bi-plus-lg"></i></button>`
+                                            : `<button class="btn btn-sm btn-link text-muted p-0 px-2 text-decoration-none" disabled style="font-size: 1rem; line-height: 1;"><i class="bi bi-plus-lg"></i></button>`
+                                        }
+                                    </div>
+                                    <span class="fw-bold text-success">${formatPrecio(servicio.precio * servicio.cantidad)}</span>
+                                </div>
+                                ${obtenerCupoDisponible(servicio.codigo) <= 2 && obtenerCupoDisponible(servicio.codigo) > 0
+                                    ? `<div class="text-warning small mt-2" style="font-size: 0.72rem;">¡Últimos ${obtenerCupoDisponible(servicio.codigo)} cupos!</div>`
+                                    : ''}
+                            </div>
+                        `).join("")}
+                    </div>
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center mt-3">
                     <a href="servicios.html" class="btn btn-outline-secondary rounded-pill px-4">
                         <i class="bi bi-arrow-left me-2"></i>Agregar más servicios
                     </a>
-                    <span class="text-muted small">
+                    <span class="text-muted small d-none d-sm-inline">
                         <i class="bi bi-info-circle me-1"></i>Precios en pesos chilenos (CLP)
                     </span>
                 </div>
             </div>
 
             <div class="col-lg-4">
-                <div class="card border-0 shadow-sm rounded-4 bg-white p-4 position-sticky" style="top: 95px;">
+                <div class="card border-0 shadow-sm rounded-4 bg-white p-4 carrito-sidebar position-sticky" style="top: 95px;">
                     <h5 class="fw-bold text-dark mb-3">Resumen de reserva</h5>
                     
                     <div class="d-flex justify-content-between text-muted mb-2">
@@ -159,6 +200,7 @@ function renderCarrito() {
     `;
 }
 
+// ==================== ACCIONES DEL CARRITO ====================
 function agregarDesdeCarrito(codigo) {
     const disponibles = obtenerCupoDisponible(codigo);
     if (disponibles <= 0) {
@@ -183,6 +225,7 @@ function eliminarDelCarritoCompleto(codigo) {
     actualizarBadgeCarrito();
 }
 
+// ==================== RESERVA ====================
 function confirmarReserva() {
     const usuario = obtenerUsuarioLogueado();
     if (!usuario) {
@@ -191,6 +234,14 @@ function confirmarReserva() {
         return;
     }
 
+    const carrito = obtenerCarrito();
+    const reservados = obtenerReservados();
+
+    carrito.forEach(item => {
+        reservados[item.codigo] = (reservados[item.codigo] || 0) + item.cantidad;
+    });
+
+    guardarReservados(reservados);
     vaciarCarrito();
     actualizarBadgeCarrito();
     renderCarrito();
@@ -211,6 +262,7 @@ function confirmarVaciar() {
     renderCarrito();
 }
 
+// ==================== INICIALIZACIÓN ====================
 document.addEventListener("DOMContentLoaded", function () {
     renderCarrito();
     actualizarBadgeCarrito();

@@ -1,7 +1,5 @@
-// constante para llamar al array
+// ==================== USUARIOS ====================
 const CLAVE_USUARIOS = "nutrivida_usuarios"
-
-// para manejar el array
 function obtenerUsuarios(){
     const datos = localStorage.getItem(CLAVE_USUARIOS);
     if (datos === null) return [];
@@ -13,7 +11,6 @@ function guardarUsuarios(usuarios){
     localStorage.setItem(CLAVE_USUARIOS, usuariosJSON);
 }
 
-// para manejar objetos individuales
 function agregarUsuario(usuario){
     const usuarios = obtenerUsuarios();
     usuarios.push(usuario);
@@ -27,6 +24,7 @@ function buscarUsuarioPorCorreo(correo) {
     });
 }
 
+// ==================== SESIÓN ====================
 function obtenerUsuarioLogueado() {
     const datos = localStorage.getItem("usuarioLogueado");
     if (datos === null) return null;
@@ -35,7 +33,53 @@ function obtenerUsuarioLogueado() {
 
 function cerrarSesion() {
     localStorage.removeItem("usuarioLogueado");
-    window.location.href = "index.html";
+    window.location.href = "../index.html";
+}
+
+// ==================== INTENTOS FALLIDOS ====================
+const CLAVE_INTENTOS = "nutrivida_intentos";
+const MAX_INTENTOS = 3;
+
+function obtenerIntentos() {
+    const datos = localStorage.getItem(CLAVE_INTENTOS);
+    if (datos === null) return {};
+    return JSON.parse(datos);
+}
+
+function guardarIntentos(intentos) {
+    localStorage.setItem(CLAVE_INTENTOS, JSON.stringify(intentos));
+}
+
+function incrementarIntentos(correo) {
+    const intentos = obtenerIntentos();
+    if (!intentos[correo]) {
+        intentos[correo] = { intentos: 0, bloqueado: false };
+    }
+    intentos[correo].intentos++;
+    if (intentos[correo].intentos >= MAX_INTENTOS) {
+        intentos[correo].bloqueado = true;
+    }
+    guardarIntentos(intentos);
+}
+
+function resetearIntentos(correo) {
+    const intentos = obtenerIntentos();
+    if (intentos[correo]) {
+        intentos[correo].intentos = 0;
+        intentos[correo].bloqueado = false;
+        guardarIntentos(intentos);
+    }
+}
+
+function estaBloqueado(correo) {
+    const intentos = obtenerIntentos();
+    return intentos[correo] && intentos[correo].bloqueado;
+}
+
+function obtenerIntentosRestantes(correo) {
+    const intentos = obtenerIntentos();
+    if (!intentos[correo]) return MAX_INTENTOS;
+    return MAX_INTENTOS - intentos[correo].intentos;
 }
 
 // ==================== CARRITO ====================
@@ -94,6 +138,18 @@ function serviciosEnCarrito() {
 }
 
 // ==================== CUPOS ====================
+const CLAVE_RESERVADOS = "nutrivida_reservados";
+
+function obtenerReservados() {
+    const datos = localStorage.getItem(CLAVE_RESERVADOS);
+    if (datos === null) return {};
+    return JSON.parse(datos);
+}
+
+function guardarReservados(reservados) {
+    localStorage.setItem(CLAVE_RESERVADOS, JSON.stringify(reservados));
+}
+
 function cantidadEnCarrito(codigo) {
     const item = obtenerCarrito().find(i => i.codigo === codigo);
     return item ? item.cantidad : 0;
@@ -102,7 +158,9 @@ function cantidadEnCarrito(codigo) {
 function obtenerCupoDisponible(codigo) {
     const servicio = servicios.find(s => s.codigo === codigo);
     if (!servicio) return 0;
-    return servicio.cuposIniciales - cantidadEnCarrito(codigo);
+    const enCarrito = cantidadEnCarrito(codigo);
+    const reservados = obtenerReservados()[codigo] || 0;
+    return servicio.cuposIniciales - enCarrito - reservados;
 }
 
 function actualizarBadgeCarrito() {
@@ -119,7 +177,7 @@ function formatPrecio(precio) {
     return "$" + precio.toLocaleString("es-CL");
 }
 
-// ==================== NAVBAR ====================
+// ==================== UI ====================
 function actualizarNavbar() {
     const usuarioLogueado = obtenerUsuarioLogueado();
     const botonIniciarSesion = document.getElementById("botonIniciarSesion");

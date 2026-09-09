@@ -1,19 +1,32 @@
 :root {
+    /* Colores principales */
     --primary: #4f63d4;
     --primary-dark: #4455b8;
     --secondary: #74c056;
     --secondary-dark: #4f8539;
     --accent: #db8d3a;
     --accent-dark: #e28521;
+
+    /* Superficies */
     --bg: #F8FAF9;
     --text: #222020;
     --text-light: #777777;
     --white: #FFFFFF;
     --border: #E8E8E8;
+
+    /* Sombras */
     --shadow: 0 1px 4px rgba(0, 0, 0, 0.13);
     --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.13);
+
+    /* Componentes */
     --radius: 15px;
     --transition: all 0.25s ease;
+
+    /* Footer */
+    --footer-bg: #2D2D2D;
+    --footer-text: rgba(255, 255, 255, 0.7);
+    --footer-text-muted: rgba(255, 255, 255, 0.6);
+    --footer-border: rgba(255, 255, 255, 0.35);
 }
 
 * {
@@ -28,8 +41,27 @@ html {
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
     background-color: var(--bg);
     color: var(--text);
-    padding-top: 0px;
+}
+
+/* ==================== UTILIDADES ==================== */
+
+/* Padding vertical para secciones principales (Quiénes somos, Contáctanos) */
+.py-section {
+    padding: 9rem 0;
+    background-color: var(--bg);
+}
+
+/* Fondo alternativo para secciones con fondo blanco (Quiénes somos) */
+.bg-alt {
+    background-color: var(--white);
+}
+
+/* Título de subsección dentro de una sección (Nuestra Historia, Nuestro Equipo) */
+.subsection-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary-dark);
 }

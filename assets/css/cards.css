@@ -1,3 +1,4 @@
+/* ==================== CARDS ==================== */
 .section-title {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
@@ -62,8 +63,8 @@
 }
 
 .card-servicio .btn {
-    background-color: #4f63d4;
-    border-color: #4f63d4;
+    background-color: var(--primary);
+    border-color: var(--primary);
     color: var(--white);
     border-radius: 25px;
     padding: 0.4rem 1.2rem;
@@ -72,15 +73,15 @@
 }
 
 .card-servicio .btn:hover {
-    background-color: #d07a1a;
-    border-color: #d07a1a;
+    background-color: var(--accent-dark);
+    border-color: var(--accent-dark);
 }
 
-/* HISTORIA */
+/* ==================== HISTORIA ==================== */
 .history-text {
     font-size: 1.05rem;
     line-height: 1.85;
-    color: #4e4a4a;
+    color: var(--text);
 }
 
 .history-img {
@@ -94,7 +95,7 @@
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
 }
 
-/* EQUIPO */
+/* ==================== EQUIPO ==================== */
 .card-equipo {
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -106,7 +107,7 @@
 .card-equipo:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-md);
-    border-color: rgba(116, 192, 86, 0.4);
+    border-color: var(--secondary);
 }
 
 .card-equipo .card-body {
@@ -148,7 +149,7 @@
     margin-bottom: 0;
 }
 
-/* CONTACTO */
+/* ==================== CONTACTO ==================== */
 .card-contacto {
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -220,15 +221,18 @@
     color: var(--primary);
 }
 
-/* FORMULARIO CONTACTO */
-.card-contacto .form-label {
+/* ==================== FORMULARIOS ==================== */
+.card-contacto .form-label,
+.card-auth .form-label {
     font-weight: 500;
     font-size: 0.88rem;
     color: var(--text);
     margin-bottom: 0.35rem;
 }
 
-.card-contacto .form-control {
+.card-contacto .form-control,
+.card-auth .form-control,
+.card-auth .form-select {
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 0.65rem 0.95rem;
@@ -241,6 +245,13 @@
     background-color: var(--white);
     border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(79, 99, 212, 0.12);
+}
+
+.card-auth .form-control:focus,
+.card-auth .form-select:focus {
+    background-color: var(--white);
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(116, 192, 86, 0.15);
 }
 
 .btn-contacto {
@@ -261,7 +272,7 @@
     box-shadow: 0 4px 12px rgba(116, 192, 86, 0.3);
 }
 
-/* MAPA RESPONSIVO */
+/* ==================== MAPA RESPONSIVO ==================== */
 .map-responsive {
     position: relative;
     width: 100%;
@@ -275,83 +286,10 @@
     display: block;
 }
 
-/* RANGO DE PRECIO — DUAL SLIDER */
-.dual-range-container {
-    position: relative;
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    height: 40px;
-}
-
-.dual-range-track {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 6px;
-    background: #dee2e6;
-    border-radius: 3px;
-    width: 100%;
-    z-index: 1;
-}
-
-.dual-range-active {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 6px;
-    background: var(--secondary);
-    border-radius: 3px;
-    z-index: 1;
-}
-
-.dual-range-input {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    pointer-events: none;
-    -webkit-appearance: none;
-    appearance: none;
-    height: 40px;
-    background: transparent;
-    z-index: 2;
-}
-
-.dual-range-input::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    height: 22px;
-    width: 22px;
-    border-radius: 50%;
-    background: var(--secondary);
-    border: 3px solid #fff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    cursor: pointer;
-    pointer-events: all;
-}
-
-.dual-range-input::-moz-range-thumb {
-    height: 22px;
-    width: 22px;
-    border-radius: 50%;
-    background: var(--secondary);
-    border: 3px solid #fff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    cursor: pointer;
-    pointer-events: all;
-    border: none;
-}
-
-/* ESTILOS ESPECÍFICOS PARA PÁGINA SERVICIOS */
+/* ==================== PÁGINA SERVICIOS ==================== */
 .servicios-hero {
     border-bottom: 1px solid var(--border);
     padding: 3.5rem 0 2.5rem;
-}
-
-.servicios-filtros-card {
-    background-color: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
 }
 
 .card-catalogo {
@@ -372,11 +310,7 @@
     text-align: left;
 }
 
-#filtros .btn * {
-    pointer-events: none;
-}
-
-/* Rango de precio simple (Bootstrap form-range) */
+/* ==================== RANGO DE PRECIO ==================== */
 .form-range::-webkit-slider-thumb {
     background-color: var(--secondary);
 }
@@ -393,7 +327,7 @@
     background-color: var(--secondary-dark);
 }
 
-/* DETALLE DE SERVICIO (pages/detalle.html) */
+/* ==================== DETALLE DE SERVICIO ==================== */
 .card-detalle {
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -412,7 +346,81 @@
     background-color: #f8faf9;
 }
 
+/* ==================== AUTH PAGES ==================== */
+.card-auth {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background-color: var(--white);
+    box-shadow: var(--shadow-md);
+    max-width: 480px;
+    margin: 0 auto;
+}
 
+.card-auth .card-body {
+    padding: 2.5rem;
+}
 
+.auth-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba(116, 192, 86, 0.12);
+    color: var(--secondary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+}
 
+.auth-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+}
+
+.auth-subtitle {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 1.8rem;
+}
+
+.card-auth .btn-success {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.7rem;
+    transition: var(--transition);
+}
+
+.card-auth .btn-success:hover {
+    background-color: var(--secondary-dark);
+    border-color: var(--secondary-dark);
+    transform: translateY(-1px);
+}
+
+.auth-link {
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.auth-link:hover {
+    color: var(--secondary-dark);
+    text-decoration: underline;
+}
+
+.card-auth .form-check-input:checked {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+}
+
+.card-auth .form-check {
+    margin-top: 0.2rem;
+}
 

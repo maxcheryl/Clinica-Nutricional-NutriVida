@@ -1,10 +1,53 @@
+/* ==================== RESPONSIVE ==================== */
+
+/* ---- TABLET (768px - 1199px) ---- */
+@media (max-width: 1199.98px) {
+    .py-section {
+        padding: 5rem 0;
+    }
+
+    .hero {
+        padding: 7rem 0;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+
+    /* CTA */
+    .cta-section .row {
+        gap: 2rem !important;
+    }
+
+    /* Footer */
+    .footer .d-flex.gap-5 {
+        justify-content: flex-start;
+    }
+}
+
+/* ---- MOBILE (<= 768px) ---- */
 @media (max-width: 768px) {
+    /* Hero */
+    .hero {
+        padding: 5rem 0;
+        min-height: auto;
+    }
+
     .hero-title {
         font-size: 2rem;
     }
 
     .hero-subtitle {
         font-size: 1rem;
+    }
+
+    .hero-content {
+        margin-bottom: 2.5rem;
+    }
+
+    /* Secciones */
+    .py-section {
+        padding: 3.5rem 0;
     }
 
     .section-title {
@@ -15,12 +58,87 @@
         font-size: 1.3rem;
     }
 
-    .py-section {
-        padding: 3.5rem 0;
+    /* CTA */
+    .cta-text-box {
+        max-width: 70%;
+        text-align: center;
+        padding-bottom: 5rem;
+    }
+  
+    .cta-img {
+        max-width: 200px;
+        margin: 0 auto;
+        margin-bottom: -5rem;
     }
 
+    /* Footer */
+    
+
+    .footer .d-flex.gap-5 {
+        flex-direction: column;
+        gap: 1.5rem !important;
+        padding-left: 6rem;
+    }
+
+    .footer-brand-box {
+        margin-bottom: 1rem;
+    }
+
+    /* Carrito */
+    .carrito-mobile-card {
+        display: block !important;
+    }
+
+    .carrito-desktop-table {
+        display: none !important;
+    }
+
+    .carrito-sidebar {
+        position: static !important;
+    }
+
+    /* Contacto */
     .card-contacto .card-body {
         padding: 1.5rem;
     }
+
+    /* Auth */
+    .card-auth[style*="560px"] {
+        max-width: 100% !important;
+    }
+
+    .card-auth .card-body {
+        padding: 1.5rem;
+    }
+
+    .card-auth {
+        margin: 0 0.5rem;
+    }
 }
 
+/* ---- TElEFONOS PEQUEÑOS (<= 400px) ---- */
+@media (max-width: 400px) {
+    .hero-title {
+        font-size: 1.75rem;
+    }
+
+    .brand-text {
+        font-size: 1rem;
+    }
+
+   .cta-section .btn {
+        max-width: 80%;
+        height: 4rem;
+        font-size: 1rem;
+   }
+
+    .cta-text-box {
+        max-width: 200%;
+        text-align: center;
+        padding-bottom: 3rem;
+    }
+
+    .cta-img {
+        max-width: 150px;
+    }
+}

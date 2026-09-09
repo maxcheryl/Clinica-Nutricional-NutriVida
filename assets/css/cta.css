@@ -1,3 +1,4 @@
+/* ==================== CTA ==================== */
 .cta-section {
     background-color: #8d765f1a;
     color: #434040;
@@ -11,11 +12,12 @@
 
 .cta-section p {
     font-size: 1.1rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
 }
 
 .cta-img {
     max-width: 100%;
+    height: auto;
     display: block;
 }
 

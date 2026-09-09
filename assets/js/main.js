@@ -1,59 +1,47 @@
-document.addEventListener('DOMContentLoaded', function () {
+// ==================== PÁGINA PRINCIPAL ====================
+document.addEventListener("DOMContentLoaded", function () {
 
-    const usuarioLogueado = JSON.parse(localStorage.getItem("usuarioLogueado"));
+    actualizarNavbar();
+    actualizarBadgeCarrito();
 
-    const botonIniciarSesion = document.getElementById("botonIniciarSesion");
-    const infoUsuario = document.getElementById("infoUsuario");
-    const botonCerrarSesion = document.getElementById("botonCerrarSesion");
-    const nombreUsuario = document.getElementById("nombreUsuario");
-    const btnCerrarSesion = document.getElementById("btnCerrarSesion")
+    // ==================== FORMULARIO DE CONTACTO ====================
+    const contactForm = document.getElementById("contactForm");
+    const mensajeContacto = document.getElementById("mensajeContacto");
 
-    if (usuarioLogueado) {
-        // Usuario logueado → mostrar nombre y cerrar sesión
-        if (botonIniciarSesion) botonIniciarSesion.classList.add("d-none");
-        if (infoUsuario) infoUsuario.classList.remove("d-none");
-        if (botonCerrarSesion) botonCerrarSesion.classList.remove("d-none");
-        if (nombreUsuario) nombreUsuario.textContent = `Hola, ${usuarioLogueado.nombre}`;
-    } else {
-        // No hay sesión → mostrar "Iniciar Sesión"
-        if (botonIniciarSesion) botonIniciarSesion.classList.remove("d-none");
-        if (infoUsuario) infoUsuario.classList.add("d-none");
-        if (botonCerrarSesion) botonCerrarSesion.classList.add("d-none");
+    function mostrarErrorContacto(mensaje) {
+        mensajeContacto.textContent = mensaje;
+        mensajeContacto.classList.remove("d-none");
+        mensajeContacto.classList.remove("alert-success");
+        mensajeContacto.classList.add("alert-danger");
     }
 
-    if (botonCerrarSesion){
-        btnCerrarSesion.addEventListener("click", function(e){
-            e.preventDefault();
-            cerrarSesion()
-        })
-    }
-
-    // BADGE CARRITO
-    if (typeof actualizarBadgeCarrito === "function") {
-        actualizarBadgeCarrito();
-    }
-
-    // NAVBAR
-    if (typeof actualizarNavbar === "function") {
-        actualizarNavbar();
-    }
-
-    // FORMULARIO DE CONTACTO
-    const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', function (e) {
+        contactForm.addEventListener("submit", function (e) {
             e.preventDefault();
+            mensajeContacto.classList.add("d-none");
 
-            const nombre = document.getElementById('nombre').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const mensaje = document.getElementById('mensaje').value.trim();
+            const nombre = document.getElementById("nombre").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const telefono = document.getElementById("telefono").value.trim();
+            const mensaje = document.getElementById("mensaje").value.trim();
 
-            if (!nombre || !email || !mensaje) {
-                alert('Por favor completa todos los campos obligatorios.');
+            if (!nombre || !email || !telefono || !mensaje) {
+                mostrarErrorContacto("Todos los campos son obligatorios");
                 return;
             }
 
-            alert('Mensaje enviado correctamente. ¡Gracias ' + nombre + '!'); //reemplazar por un alert decente de bootstrap
+            if (nombre.length < 2) {
+                mostrarErrorContacto("El nombre debe tener al menos 2 caracteres");
+                return;
+            }
+
+            if (!email.endsWith("@duocuc.cl")) {
+                mostrarErrorContacto("El dominio del correo debe ser @duocuc.cl");
+                return;
+            }
+
+            const modal = new bootstrap.Modal(document.getElementById("modalContactoExito"));
+            modal.show();
             contactForm.reset();
         });
     }

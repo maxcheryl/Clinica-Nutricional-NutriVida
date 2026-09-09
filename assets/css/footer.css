@@ -1,6 +1,7 @@
+/* ==================== FOOTER ==================== */
 .footer {
-    background-color: #2D2D2D;
-    color: rgba(255, 255, 255, 0.7);
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
     padding: 4rem 0 2rem;
     font-size: 0.9rem;
 }
@@ -14,12 +15,12 @@
 }
 
 .footer-brand-box {
-    max-width: 300px;
+    max-width: 100%;
 }
 
 .footer-text {
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.753);
+    color: var(--footer-text);
 }
 
 .footer-links {
@@ -33,7 +34,7 @@
 }
 
 .footer-links a {
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--footer-text-muted);
     text-decoration: none;
     transition: var(--transition);
 }
@@ -50,17 +51,17 @@
 
 .footer-contact li {
     margin-bottom: 0.6rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--footer-text-muted);
 }
 
 .footer-divider {
-    border-color: rgba(255, 255, 255, 0.356);
+    border-color: var(--footer-border);
     margin: 2rem 0 1.5rem;
 }
 
 .footer-copyright {
     text-align: center;
-    color: rgba(255, 255, 255, 0.87);
+    color: var(--white);
     font-size: 0.85rem;
     margin: 0;
 }
