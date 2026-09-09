@@ -189,11 +189,11 @@
                                 <h4 class="contacto-card-title mb-4">Envíanos un mensaje</h4>
                                 <form id="contactForm">
                                     <div class="mb-3">
-                                        <label for="nombre" class="form-label">Nombre completo</label>
+                                        <label for="nombre" class="form-label">Nombre completo<span class="obligatorio">*</span></label>
                                         <input type="text" class="form-control" id="nombre" placeholder="Tu nombre" required  minlength="2" maxlength="50">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="email" class="form-label">Correo electrónico</label>
+                                        <label for="email" class="form-label">Correo electrónico<span class="obligatorio">*</span></label>
                                         <input type="email" class="form-control" id="email" placeholder="correo@correo.com" required>
                                     </div>
                                     <div class="mb-3">
@@ -201,7 +201,7 @@
                                         <input type="tel" class="form-control" id="telefono" placeholder="+56 9 1234 5678">
                                     </div>
                                     <div class="mb-4">
-                                        <label for="mensaje" class="form-label">Mensaje</label>
+                                        <label for="mensaje" class="form-label">Mensaje<span class="obligatorio">*</span></label>
                                         <textarea class="form-control" id="mensaje" rows="4" placeholder="Escribe tu mensaje aquí..." required minlength="10" maxlength="500"></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-contacto w-100">Enviar Mensaje</button>

@@ -71,34 +71,34 @@
                         <form id="formCrearCuenta">
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <label for="nombre" class="form-label">Nombre<span class="obligatorio">*</span></label>
                                     <input type="text" class="form-control" id="nombre">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="apellido" class="form-label">Apellido</label>
+                                    <label for="apellido" class="form-label">Apellido<span class="obligatorio">*</span></label>
                                     <input type="text" class="form-control" id="apellido">
                                 </div>
                                 <div class="col-12">
-                                    <label for="email" class="form-label">Correo electrónico</label>
+                                    <label for="email" class="form-label">Correo electrónico<span class="obligatorio">*</span></label>
                                     <input type="email" class="form-control" id="email" placeholder="correo@duocuc.cl">
                                 </div>
                                 <div class="col-12">
-                                    <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
+                                    <label for="fechaNacimiento" class="form-label">Fecha de nacimiento<span class="obligatorio">*</span></label>
                                     <input type="date" class="form-control" id="fechaNacimiento">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="pass" class="form-label">Contraseña</label>
+                                    <label for="pass" class="form-label">Contraseña<span class="obligatorio">*</span></label>
                                     <input type="password" class="form-control" id="pass" placeholder="••••••••">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="confirmPass" class="form-label">Confirmar contraseña</label>
+                                    <label for="confirmPass" class="form-label">Confirmar contraseña<span class="obligatorio">*</span></label>
                                     <input type="password" class="form-control" id="confirmPass" placeholder="••••••••">
                                 </div>
                                 <div id="mensajeContrasena" class="alert alert-danger mb-0 d-none">
                                     Contraseñas no coinciden
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="genero" class="form-label">Género</label>
+                                    <label for="genero" class="form-label">Género<span class="obligatorio">*</span></label>
                                     <select class="form-select" id="genero">
                                         <option value="" selected disabled>Seleccione</option>
                                         <option value="Mujer">Mujer</option>
@@ -108,7 +108,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="region" class="form-label">Región</label>
+                                    <label for="region" class="form-label">Región<span class="obligatorio">*</span></label>
                                     <select class="form-select" id="region">
                                         <option value="" selected disabled>Seleccione</option>
                                         <option value="Arica">Arica y Parinacota</option>
@@ -130,14 +130,14 @@
                                     </select>
                                 </div>
                                 <div class="col-12">
-                                    <label for="direccion" class="form-label">Dirección</label>
+                                    <label for="direccion" class="form-label">Dirección<span class="obligatorio">*</span></label>
                                     <input type="text" class="form-control" id="direccion" placeholder="Calle y número">
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="aceptaTerminos">
                                         <label class="form-check-label" for="aceptaTerminos">
-                                            Acepto los términos y condiciones de registro
+                                            Acepto los términos y condiciones de registro<span class="obligatorio">*</span>
                                         </label>
                                     </div>
                                 </div>

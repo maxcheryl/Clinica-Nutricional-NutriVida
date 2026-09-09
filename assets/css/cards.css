@@ -426,6 +426,12 @@
 
 /* ==================== UTILIDADES REUTILIZABLES ==================== */
 
+/* Asterisco para campos obligatorios */
+.form-label .obligatorio {
+    color: #dc3545;
+    margin-left: 2px;
+}
+
 /* Icono circular para modales y badges (70px), icono con check verde*/
 .icon-circle {
     width: 70px;

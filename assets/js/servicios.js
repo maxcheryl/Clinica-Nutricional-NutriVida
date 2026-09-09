@@ -379,20 +379,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (buscador) buscador.value = "";
         if (selectCategoria) selectCategoria.value = "todos";
-        if (minSlider) minSlider.value = 10000;
         if (maxSlider) maxSlider.value = 170000;
         if (precioValor) precioValor.textContent = formatPrecio(170000);
-        actualizarTrack();
-
-        document.querySelectorAll("#filtros .btn").forEach(b => {
-            b.classList.remove("active", "btn-success");
-            b.classList.add("btn-outline-success");
-        });
-        const btnTodos = document.querySelector('#filtros .btn[data-tipo="todos"]');
-        if (btnTodos) {
-            btnTodos.classList.add("active", "btn-success");
-            btnTodos.classList.remove("btn-outline-success");
-        }
 
         renderCatalogo();
     });

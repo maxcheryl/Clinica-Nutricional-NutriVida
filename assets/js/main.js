@@ -25,8 +25,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const telefono = document.getElementById("telefono").value.trim();
             const mensaje = document.getElementById("mensaje").value.trim();
 
-            if (!nombre || !email || !telefono || !mensaje) {
-                mostrarErrorContacto("Todos los campos son obligatorios");
+            if (!nombre || !email || !mensaje) {
+                mostrarErrorContacto("Nombre, correo y mensaje son obligatorios");
                 return;
             }
 
